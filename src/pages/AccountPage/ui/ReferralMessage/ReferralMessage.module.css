@@ -1,0 +1,90 @@
+._ {
+	margin-top: 27px;
+}
+
+.title {
+	text-align: start;
+}
+
+.message__examples {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+	margin-top: 25px;
+}
+
+.exampleCard {
+	width: 293px;
+	height: 246px;
+	padding: 15px;
+	border-radius: 8px;
+	border: 1px solid #8e8e8e;
+	cursor: pointer;
+}
+
+.exampleCard__text {
+	font-family: MontserratRegular;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 18px;
+	letter-spacing: 0em;
+	text-align: left;
+	margin: 0;
+	color: var(--primary-text-color);
+}
+
+.exampleCard_active {
+	border-color: #fd7e14;
+}
+
+.textWrapper {
+	width: 100%;
+	height: 135px;
+	border: 1px solid #8e8e8e;
+	background-color: #343434;
+	padding: 15px;
+	border-radius: 8px;
+	margin-top: 15px;
+}
+
+.textWrapper_light {
+	background-color: #fbfbfb;
+}
+
+.textWrapper__ref {
+	font-family: MontserratRegular;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 16px;
+	letter-spacing: 0em;
+	text-align: left;
+	color: #00000080;
+}
+
+.textArea {
+	resize: none;
+	width: 100%;
+	height: 82px;
+	background-color: transparent;
+	border: none;
+	font-family: MontserratRegular;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 20px;
+	letter-spacing: 0em;
+	text-align: left;
+	color: var(--primary-text-color);
+	padding: 0;
+}
+
+.textArea:focus {
+	outline: none;
+}
+
+.sendWrapper {
+	display: flex;
+	justify-content: end;
+	gap: 20px;
+	margin-top: 14px;
+	align-items: center;
+}

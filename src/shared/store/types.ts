@@ -1,17 +1,14 @@
 import React, { SetStateAction } from 'react';
 
 export enum Themes {
-	DEFAULT = 'default',
 	DARK = 'dark',
+	LIGHT = 'light',
 }
 
 export type ContextType = {
 	user: {
 		value: string | undefined;
-		setValue: React.Dispatch<SetStateAction<undefined>>;
+		setValue: React.Dispatch<SetStateAction<string | undefined>>;
 	};
-	theme: {
-		value: string | undefined;
-		setValue: React.Dispatch<SetStateAction<Themes>>;
-	};
+	theme: { value: boolean; setValue: (theme: Themes) => void };
 };

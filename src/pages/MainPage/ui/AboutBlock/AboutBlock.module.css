@@ -1,0 +1,72 @@
+._ {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.title {
+	font-family: MontserratBold;
+	font-size: 50px;
+	font-weight: 700;
+	line-height: 61px;
+	letter-spacing: 0em;
+
+	margin: 0 0 24.5px;
+}
+
+.text {
+	font-family: MontserratRegular;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 21px;
+	letter-spacing: 0em;
+}
+
+.confidence {
+	width: 1182px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.description {
+	width: 612px;
+}
+
+.numbers {
+	margin-top: 88px;
+	width: 1221px;
+	height: 437.5px;
+	position: relative;
+}
+
+.grid {
+	width: 350px;
+	margin-top: 44px;
+}
+
+.param {
+	font-family: MontserratSemiBold;
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 26px;
+	letter-spacing: 0em;
+	text-align: left;
+	vertical-align: bottom;
+}
+
+.stat {
+	font-family: MontserratRegular;
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 26px;
+	letter-spacing: 0em;
+	text-align: left;
+	vertical-align: bottom;
+	color: #fd7e14;
+}
+
+.token {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}

@@ -1,0 +1,125 @@
+._ {
+	width: 317px;
+	height: 540px;
+	border-radius: 20px;
+	border: 2px solid #bfbfbf;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 14px 25px 36px;
+	background-color: #fbfbfb;
+}
+
+.dark {
+	background-color: transparent;
+}
+
+.wallet__title {
+	text-align: left;
+	margin: 21px 0 14px;
+}
+
+.buy__title {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.wallet__balance {
+	font-family: MontserratSemiBold;
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 26px;
+	letter-spacing: 0em;
+	text-align: left;
+}
+
+.wallet__balance_amount {
+	font-family: MontserratRegular;
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 26px;
+	letter-spacing: 0em;
+	text-align: left;
+}
+
+.wallet__buy {
+	margin: 35px 0;
+}
+
+.buy__amount {
+	font-family: MontserratRegular;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 16px;
+	letter-spacing: 0em;
+	text-align: left;
+}
+
+.inputWrapper {
+	position: relative;
+	margin: 5px 0;
+}
+
+.buy__input {
+	width: 100%;
+	height: 40px;
+	padding: 16px 66px 16px 14px;
+	box-sizing: border-box;
+	border: 1px solid #fd7e14;
+	border-radius: 6px;
+	font-family: MontserratRegular;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 22px;
+	letter-spacing: 0px;
+	text-align: left;
+}
+
+.buy__input:focus {
+	outline: 1px solid #fd7e14;
+}
+
+.input__tag {
+	position: absolute;
+	box-sizing: border-box;
+	right: 0;
+	top: 0;
+	width: 54px;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid #fd7e14;
+	border-radius: 6px;
+	background: #f2f2f2;
+}
+
+.tag__text {
+	background-image: linear-gradient(180deg, #f5bd00 0%, #fd7e14 100%);
+	background-clip: text;
+	font-family: MontserratSemiBold;
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 23px;
+	letter-spacing: 0em;
+	text-align: center;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	-moz-background-clip: text;
+	-moz-text-fill-color: transparent;
+}
+
+.currenceAmount {
+	font-family: MontserratRegular;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 16px;
+	letter-spacing: 0em;
+	text-align: center;
+}
+
+.button {
+	width: 100%;
+	margin-top: 22px;
+}

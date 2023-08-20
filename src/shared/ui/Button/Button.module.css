@@ -1,0 +1,41 @@
+._ {
+	height: 46px;
+	width: fit-content;
+	padding: 10px 20px;
+	border-radius: 4px;
+	background-color: #f5bd00;
+	color: var(--primary-button-color);
+	border: 1px solid #f5bd00;
+	font-family: MontserratBold;
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 26px;
+	letter-spacing: 0em;
+	text-align: center;
+	cursor: pointer;
+}
+
+.icon {
+	padding: 0;
+	background-color: transparent;
+	border: none;
+}
+
+._:hover {
+	background-color: var(--primary-background-color);
+	color: var(--primary-text-color);
+}
+
+.icon:hover {
+	background-color: transparent;
+}
+
+.text {
+	padding: 0;
+	background-color: transparent;
+	border: none;
+}
+
+.text:hover {
+	background-color: transparent;
+}

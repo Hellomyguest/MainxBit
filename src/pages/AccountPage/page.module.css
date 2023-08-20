@@ -1,0 +1,80 @@
+._ {
+	display: flex;
+	justify-content: center;
+	padding-top: 69px;
+}
+
+.wrapper {
+	width: 1240px;
+	display: flex;
+	gap: 27px;
+}
+
+.content {
+	display: flex;
+	flex: 1 1;
+	flex-direction: column;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 42px;
+}
+
+.lastEnter {
+	font-family: MontserratSemiBold;
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 26px;
+	letter-spacing: 0em;
+	text-align: center;
+}
+
+.referral__title {
+	text-align: start;
+}
+
+.referral__wrapper {
+	position: relative;
+
+	margin-top: 4px;
+}
+
+.referral__text {
+	display: inline-block;
+	width: 100%;
+	height: 40px;
+	padding: 13px 105px 13px 14px;
+	font-family: MontserratRegular;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 100%;
+	letter-spacing: 0px;
+	text-align: left;
+	border: 1px solid #fd7e14;
+	border-radius: 6px;
+	background-color: #343434;
+}
+
+.referral__text_light {
+	background-color: #fbfbfb;
+}
+
+.referral__button {
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 100%;
+	width: 91px;
+	background-color: #fd7e14;
+	border-color: #fd7e14;
+	padding: 6px;
+	font-family: MontserratSemiBold;
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 23px;
+	letter-spacing: 0em;
+	text-align: center;
+	color: #ffffff;
+}

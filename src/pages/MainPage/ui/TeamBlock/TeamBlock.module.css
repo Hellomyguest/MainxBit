@@ -1,0 +1,51 @@
+._ {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.wrapper {
+	width: 1237px;
+}
+
+.title {
+	font-family: MontserratBold;
+	font-size: 50px;
+	font-weight: 700;
+	line-height: 61px;
+	letter-spacing: 0em;
+	text-align: center;
+
+	margin: 0 0 47px;
+}
+
+.gallery {
+	height: 300px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 19px;
+	overflow: hidden;
+	transition: height 0.3s;
+}
+
+.gallery_open {
+	height: 600px;
+}
+
+.card {
+	width: 293px;
+	height: 292px;
+	border-radius: 30px;
+	border: 4px solid #f5bd00;
+	background-color: #d9d9d9;
+}
+
+.button {
+	float: right;
+	margin-top: 10px;
+	color: var(--primary-text-color);
+}
+
+.button:hover {
+	text-decoration: underline;
+}

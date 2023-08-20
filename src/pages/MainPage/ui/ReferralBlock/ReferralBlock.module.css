@@ -1,0 +1,57 @@
+._ {
+	height: 277px;
+	width: 964px;
+	margin-inline: auto;
+}
+
+.title {
+	font-family: MontserratBold;
+	font-size: 50px;
+	font-weight: 700;
+	line-height: 61px;
+	letter-spacing: 0em;
+	text-align: center;
+
+	margin: 0;
+}
+
+.container {
+	display: flex;
+	gap: 23px;
+}
+
+.text {
+	font-family: MontserratRegular;
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 26px;
+	letter-spacing: 0em;
+	text-align: left;
+}
+
+.cardsWrapper {
+	width: 567px;
+	margin-top: 23px;
+}
+
+.cards {
+	display: flex;
+	gap: 23px;
+	margin-top: 45px;
+}
+
+.card {
+	width: 272px;
+	height: 96px;
+	box-sizing: border-box;
+	border-radius: 20px;
+	border: 1px solid #f5bd00;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: MontserratRegular;
+	font-size: 20px;
+	font-weight: 400;
+	letter-spacing: 0em;
+	text-align: center;
+}

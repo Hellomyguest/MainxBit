@@ -1,0 +1,50 @@
+/* Carousel dots */
+
+.ant-carousel .slick-dots {
+	position: initial;
+	margin-top: 36px;
+}
+
+.ant-carousel .slick-dots li.slick-active {
+	width: 16px;
+}
+
+.ant-carousel .slick-dots li.slick-active button {
+	background: #fd7e14;
+	width: 16px;
+	height: 16px;
+	transform: translateY(-2px);
+}
+
+.ant-carousel .slick-dots li button {
+	background: #999999;
+	opacity: 1;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+}
+
+.ant-card .ant-card-meta-title {
+	white-space: pre-line;
+}
+
+.ant-carousel .slick-prev,
+.ant-carousel .slick-next,
+.ant-carousel .slick-prev:hover,
+.ant-carousel .slick-next:hover {
+	font-size: inherit;
+	color: currentColor;
+	inset-inline-start: inherit;
+	top: inherit;
+	bottom: -13px;
+}
+
+.ant-carousel .slick-prev,
+.ant-carousel .slick-prev:hover {
+	left: 230px;
+}
+
+.ant-carousel .slick-next,
+.ant-carousel .slick-next:hover {
+	right: 230px;
+}

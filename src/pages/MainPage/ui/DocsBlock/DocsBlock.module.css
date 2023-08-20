@@ -1,0 +1,61 @@
+._ {
+	display: flex;
+	justify-content: center;
+}
+
+.container {
+	position: relative;
+	width: 1278px;
+	height: 307px;
+	display: flex;
+	margin-bottom: 55px;
+}
+
+.content {
+	height: 100%;
+	width: 750px;
+	margin-left: 84.5px;
+	display: flex;
+	flex-direction: column;
+}
+
+.title {
+	font-family: MontserratBold;
+	font-size: 50px;
+	font-weight: 700;
+	line-height: 61px;
+	letter-spacing: 0em;
+	text-align: center;
+
+	margin: 0 0 40px;
+}
+
+.text {
+	font-family: MontserratRegullar;
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 26px;
+	letter-spacing: 0em;
+	text-align: left;
+}
+
+.buttonWrapper {
+	margin-top: 68.5px;
+	display: flex;
+	gap: 14px;
+}
+
+.button {
+	background-color: var(--primary-background-color);
+	color: var(--primary-text-color);
+}
+
+.button:hover {
+	background-color: #f5bd00;
+}
+
+.moon {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
