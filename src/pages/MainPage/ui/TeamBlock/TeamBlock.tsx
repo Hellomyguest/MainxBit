@@ -1,3 +1,4 @@
+import { InView } from 'react-intersection-observer';
 import { useState } from 'react';
 import styles from './TeamBlock.module.css';
 import clsx from 'clsx';
@@ -13,7 +14,18 @@ export const TeamBlock = () => {
 	return (
 		<div className={styles._}>
 			<div className={styles.wrapper}>
-				<h2 className={styles.title}>Наша команда</h2>
+				<InView>
+					{({ inView, ref }) => (
+						<h2
+							ref={ref}
+							className={clsx(styles.title, {
+								[styles.title_visible]: inView,
+							})}
+						>
+							Наша команда
+						</h2>
+					)}
+				</InView>
 				<div
 					className={clsx(styles.gallery, { [styles.gallery_open]: isOpen })}
 				>

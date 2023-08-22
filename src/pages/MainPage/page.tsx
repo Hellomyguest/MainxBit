@@ -1,4 +1,4 @@
-import { useContext, useRef } from 'react';
+import { useContext, useState } from 'react';
 import styles from './page.module.css';
 import { MainBlock, InfoBlock, ReferralBlock, WhyUsBlock } from './ui';
 import { Context } from '../../shared/store/ContextProvider';
@@ -9,14 +9,14 @@ import { DocsBlock } from './ui/DocsBlock/DocsBlock';
 
 export const MainPage = () => {
 	const context = useContext(Context);
-	const mainBlockRef = useRef<HTMLDivElement>(null);
+	const [isGoingDown, setGoingDown] = useState(true);
 
 	return (
 		<div className={styles._}>
-			<MainBlock ref={mainBlockRef}/>
-			{context?.user?.value && (
+			<MainBlock isGoingDown={isGoingDown} setGoingDown={setGoingDown} />
+			{context?.MetaMask?.wallet.accounts.length && (
 				<div className={styles.wrapper}>
-					<InfoBlock />
+					<InfoBlock isGoingDown={isGoingDown} setGoingDown={setGoingDown} />
 					<ReferralBlock />
 					<WhyUsBlock />
 					<AboutBlock />

@@ -1,5 +1,7 @@
+import { InView } from 'react-intersection-observer';
 import { ReactComponent as Deal } from './lib/deal.svg';
 import styles from './ReferralBlock.module.css';
+import clsx from 'clsx';
 
 const Card = ({ children }: { children: string }) => (
 	<div className={styles.card}>
@@ -10,7 +12,18 @@ const Card = ({ children }: { children: string }) => (
 export const ReferralBlock = () => {
 	return (
 		<div className={styles._}>
-			<h2 className={styles.title}>Реферальная программа</h2>
+			<InView>
+				{({ inView, ref }) => (
+					<h2
+						ref={ref}
+						className={clsx(styles.title, {
+							[styles.title_visible]: inView,
+						})}
+					>
+						Реферальная программа
+					</h2>
+				)}
+			</InView>
 			<div className={styles.container}>
 				<Deal />
 				<div className={styles.cardsWrapper}>

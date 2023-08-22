@@ -1,14 +1,27 @@
+import { InView } from 'react-intersection-observer';
 import { ReactComponent as Security } from './lib/security.svg';
 import { ReactComponent as Token } from './lib/token.svg';
 import styles from './AboutBlock.module.css';
 import { Col, Row } from 'antd';
+import clsx from 'clsx';
 
 export const AboutBlock = () => {
 	return (
 		<div className={styles._}>
 			<div className={styles.confidence}>
 				<div className={styles.description}>
-					<h2 className={styles.title}>О доверии</h2>
+					<InView>
+						{({ inView, ref }) => (
+							<h2
+								className={clsx(styles.title, {
+									[styles.title_visible]: inView,
+								})}
+								ref={ref}
+							>
+								О доверии
+							</h2>
+						)}
+					</InView>
 					<span className={styles.text}>
 						Наша команда постоянно работает над улучшением и развитием биржи,
 						что обеспечивает стабильный и высокий уровень доходности для
@@ -25,14 +38,22 @@ export const AboutBlock = () => {
 				<Security />
 			</div>
 			<div className={styles.numbers}>
-				<h2
-					className={styles.title}
-					style={{ textAlign: 'center', marginBottom: '50px' }}
-				>
-					О цифрах
-				</h2>
+				<InView>
+					{({ inView, ref }) => (
+						<h2
+							ref={ref}
+							className={clsx(styles.title, { [styles.title_visible]: inView })}
+							style={{ textAlign: 'center', marginBottom: '50px' }}
+						>
+							О цифрах
+						</h2>
+					)}
+				</InView>
 				<div className={styles.statistic}>
-					<h2 className={styles.title} style={{ marginBottom: '25px' }}>
+					<h2
+						className={clsx(styles.title, styles.title_visible)}
+						style={{ marginBottom: '25px' }}
+					>
 						MainX Bit
 					</h2>
 					<span className={styles.stat}>0.25 USD</span>

@@ -1,21 +1,31 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Layout } from 'antd';
 import styles from './PageLayout.module.css';
-import { InstagramIcon, Logo, QR, TelegramIcon, Tree, Tree1, Tree2, Tree3, Tree4, TwitterIcon } from './lib';
-import { Context } from '../../store/ContextProvider';
-import { ContextType } from '../../store/types';
+import {
+	InstagramIcon,
+	Logo,
+	QR,
+	TelegramIcon,
+	Tree,
+	Tree1,
+	Tree2,
+	Tree3,
+	Tree4,
+	TwitterIcon,
+} from './lib';
+import { useStore } from '../../store/ContextProvider';
 
 const { Content, Footer } = Layout;
 
 export const PageLayout = ({ children }: { children: React.ReactNode }) => {
-	const context = useContext(Context) as ContextType;
+	const context = useStore();
 	return (
 		<Layout className={styles._}>
 			<Content>{children}</Content>
-			{context?.user?.value && (
+			{context?.MetaMask?.wallet.accounts.length && (
 				<Footer className={styles.footer}>
 					<div className={styles.footer__logoWrapper}>
-						<Logo/>
+						<Logo />
 						<div className={styles.socialMedia}>
 							<TelegramIcon />
 							<InstagramIcon />

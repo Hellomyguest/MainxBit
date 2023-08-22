@@ -38,6 +38,7 @@ export const Levels = () => {
 				<div className={styles.levels}>
 					{levels.map((level) => (
 						<LevelCard
+							key={'firstLevel' + level}
 							text={level}
 							count={999}
 							className={clsx({
@@ -54,6 +55,7 @@ export const Levels = () => {
 				<div className={styles.levels}>
 					{levels.map((level) => (
 						<LevelCard
+							key={'secondLevel' + level}
 							text={level}
 							count={999}
 							className={clsx({

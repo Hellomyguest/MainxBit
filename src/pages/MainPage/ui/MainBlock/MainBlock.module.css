@@ -35,6 +35,11 @@
 	bottom: 0;
 	right: 0;
 	width: 100%;
+	transition: all 1s;
+}
+
+.mountain_up {
+	transform: translateY(-50%);
 }
 
 .bear {

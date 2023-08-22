@@ -1,3 +1,4 @@
+import { InView } from 'react-intersection-observer';
 import { Carousel } from 'antd';
 import { ReactComponent as Tick } from './lib/Tick.svg';
 import { ReactComponent as ArrowLeft } from './lib/ArrowLeft.svg';
@@ -78,7 +79,18 @@ export const WhyUsBlock = () => {
 			<NetLeft className={clsx(styles.net, styles.net_left)} />
 			<NetRight className={clsx(styles.net, styles.net_right)} />
 			<div className={styles.container}>
-				<h2 className={styles.title}>Почему мы?</h2>
+				<InView>
+					{({ inView, ref }) => (
+						<h2
+							ref={ref}
+							className={clsx(styles.title, {
+								[styles.title_visible]: inView,
+							})}
+						>
+							Почему мы?
+						</h2>
+					)}
+				</InView>
 				<div className={styles.reasons}>
 					{reasons.map((item) => (
 						<Reason key={item}>{item}</Reason>

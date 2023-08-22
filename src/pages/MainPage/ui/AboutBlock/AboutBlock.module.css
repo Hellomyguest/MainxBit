@@ -10,8 +10,13 @@
 	font-weight: 700;
 	line-height: 61px;
 	letter-spacing: 0em;
-
 	margin: 0 0 24.5px;
+	transform: translateX(-100%);
+	transition: all 1s;
+}
+
+.title_visible {
+	transform: translateX(0);
 }
 
 .text {

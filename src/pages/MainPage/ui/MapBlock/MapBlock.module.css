@@ -11,6 +11,11 @@
 	line-height: 61px;
 	letter-spacing: 0em;
 	text-align: center;
-
 	margin: 0 0 36px;
+	transform: translateX(-100%);
+	transition: all 1s;
+}
+
+.title_visible {
+	transform: translateX(0);
 }

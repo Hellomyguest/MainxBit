@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import styles from './MainBlock.module.css';
 import {
 	Moon,
@@ -17,23 +16,39 @@ import {
 	Logo_light,
 } from './lib';
 import { ProgressBar } from './ui/ProgressBar/ProgressBar';
-import { Context } from '../../../../shared/store/ContextProvider';
+import { useStore } from '../../../../shared/store/ContextProvider';
 import { Button } from '../../../../shared/ui/Button/Button';
 import { DropdownMenu } from './ui/DropdownMenu/DropdownMenu';
 import { UserOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import { useInView } from 'react-intersection-observer';
+import clsx from 'clsx';
 
 export const MainBlock = ({
-	ref,
+	isGoingDown,
+	setGoingDown,
 }: {
-	ref: React.LegacyRef<HTMLDivElement>;
+	isGoingDown: boolean;
+	setGoingDown: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
 	const progress = 25;
-	const context = useContext(Context);
+	const context = useStore();
 	const navigate = useNavigate();
+	const { ref, inView } = useInView({
+		threshold: 0.2,
+		onChange: (inView) => {
+			if (inView && !isGoingDown) {
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth',
+				});
+				setGoingDown(!isGoingDown);
+			}
+		},
+	});
 
 	return (
-		<div className={styles._} ref={ref}>
+		<div ref={ref} className={styles._}>
 			<Moon className={styles.moon} />
 			<Moon1 className={styles.moon} />
 			<Moon2 className={styles.moon} />
@@ -62,50 +77,38 @@ export const MainBlock = ({
 					</div>
 				</div>
 				<div className={styles.content__rightSide}>
-					{context?.user?.value ? (
-						<DropdownMenu
-							firstButton={{
-								icon: <UserOutlined />,
-								onClick: () => {
-									navigate('/account');
-								},
-							}}
-						/>
+					{context?.MetaMask?.hasProvider && window.ethereum?.isMetaMask ? (
+						context?.MetaMask?.wallet?.accounts.length ? (
+							<DropdownMenu
+								firstButton={{
+									icon: <UserOutlined />,
+									onClick: () => {
+										navigate('/account');
+									},
+								}}
+							/>
+						) : (
+							<Button onClick={() => context?.MetaMask?.connectMetaMask()}>
+								Войти
+							</Button>
+						)
 					) : (
-						/* <div className={styles.themeWrapper}>
-								<Button type="icon" onClick={() => {}}>
-									<MenuIcon />
-								</Button>
-								<Button
-									type="icon"
-									onClick={() => context?.theme?.setValue(Themes.DARK)}
-								>
-									{context?.theme?.value ? (
-										<MoonIcon className={styles.icon} />
-									) : (
-										<MoonIcon_light className={styles.icon} />
-									)}
-								</Button>
-								/
-								<Button
-									type="icon"
-									onClick={() => context?.theme?.setValue(Themes.LIGHT)}
-								>
-									{context?.theme?.value ? (
-										<SunIcon className={styles.icon} />
-									) : (
-										<SunIcon_light className={styles.icon} />
-									)}
-								</Button>
-							</div> */
-						<Button onClick={() => context?.user.setValue('aaa')}>Войти</Button>
+						<a href="https://metamask.io" target="_blank">
+							Install MetaMask
+						</a>
 					)}
 					<LogoIcon className={styles.logoIcon} />
 				</div>
 			</div>
-			<Mountain className={styles.mountain} />
-			<Mountain1 className={styles.mountain} />
-			<Mountain2 className={styles.mountain} />
+			<Mountain
+				className={clsx(styles.mountain, { [styles.mountain_up]: !inView })}
+			/>
+			<Mountain1
+				className={clsx(styles.mountain, { [styles.mountain_up]: !inView })}
+			/>
+			<Mountain2
+				className={clsx(styles.mountain, { [styles.mountain_up]: !inView })}
+			/>
 			<Bear className={styles.bear} />
 			<Bird className={styles.bird} />
 			<Bird1 className={styles.bird1} />
