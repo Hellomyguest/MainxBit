@@ -1,7 +1,14 @@
-export const CONTRACT_ADDRESS = '0x1A1704ceFE00cEA81DB707810CdE06652a91d5f2';
+export const CONTRACT_ADDRESS = '0x98a4326883c779c78d774e9DD81a2481D069cC42';
 
 export const CONTRACT_ABI = [
 	{ inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
+	{
+		inputs: [{ internalType: 'address', name: '', type: 'address' }],
+		name: 'address2countBuy',
+		outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+		stateMutability: 'view',
+		type: 'function',
+	},
 	{
 		inputs: [{ internalType: 'address', name: '', type: 'address' }],
 		name: 'address2id',
@@ -32,7 +39,8 @@ export const CONTRACT_ABI = [
 		outputs: [
 			{ internalType: 'uint256', name: 'countRef1', type: 'uint256' },
 			{ internalType: 'uint256', name: 'countRef2', type: 'uint256' },
-			{ internalType: 'uint256', name: 'countRef3', type: 'uint256' },
+			{ internalType: 'uint256', name: 'countBuyRef1', type: 'uint256' },
+			{ internalType: 'uint256', name: 'countBuyRef2', type: 'uint256' },
 		],
 		stateMutability: 'view',
 		type: 'function',
@@ -89,10 +97,13 @@ export const CONTRACT_ABI = [
 		type: 'function',
 	},
 	{
-		inputs: [],
-		name: 'refProfit3',
-		outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-		stateMutability: 'view',
+		inputs: [
+			{ internalType: 'address', name: '_address', type: 'address' },
+			{ internalType: 'uint256', name: '_sum', type: 'uint256' },
+		],
+		name: 'sendUSDT',
+		outputs: [],
+		stateMutability: 'nonpayable',
 		type: 'function',
 	},
 	{
@@ -123,4 +134,4 @@ export const CONTRACT_ABI = [
 		stateMutability: 'view',
 		type: 'function',
 	},
-] as const;
+];

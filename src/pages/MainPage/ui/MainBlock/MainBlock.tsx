@@ -124,7 +124,15 @@ export const MainBlock = ({
 									Купите доле распределительные токены AMB на предварительной
 									продаже по цене $0,25 и получите доход в 14x на IEO!
 								</span>
-								<Button onClick={() => {}}>Купить</Button>
+								<Button
+									onClick={() => {
+										context?.MetaMask.wallet?.accounts.length
+											? navigate('/account')
+											: context?.MetaMask?.connectMetaMask();
+									}}
+								>
+									Купить
+								</Button>
 							</div>
 							{!isScreenLg && isScreenMd && (
 								<LogoIcon className={styles.logoIcon} />

@@ -8,7 +8,7 @@ import { Tooltip } from 'antd';
 import { useStore } from '../../../../shared/store/ContextProvider';
 import { formatAddress } from '../../../../shared/store/utils';
 
-export const Account = () => {
+export const Account = ({ price }: { price?: number }) => {
 	const context = useStore();
 	const [inputValue, setInputValue] = useState('');
 	const isLogedIn = !!context?.MetaMask?.wallet.accounts.length;
@@ -30,11 +30,14 @@ export const Account = () => {
 				<div className={styles.wallet__buy}>
 					<div className={styles.buy__title}>
 						<span className={styles.wallet__balance}>Купить токен</span>
-						<span className={styles.buy__amount}>1AMB = 0,25 USD</span>
+						<span className={styles.buy__amount}>
+							{price && `1AMB = ${price} USD`}
+						</span>
 					</div>
 					<div className={styles.inputWrapper}>
 						<input
 							type="number"
+							min={0}
 							onChange={(e) => {
 								setInputValue(e.currentTarget.value);
 							}}
@@ -47,7 +50,7 @@ export const Account = () => {
 						</div>
 					</div>
 					<span className={styles.currenceAmount}>
-						{`${(+inputValue * 0.25).toFixed(2)} USD`}
+						{price && `${(+inputValue * price).toFixed(2)} USD`}
 					</span>
 					<Button onClick={() => {}} className={styles.button}>
 						Купить токен

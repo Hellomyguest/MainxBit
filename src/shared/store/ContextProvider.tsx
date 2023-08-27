@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect, useContext } from 'react';
+import Cookies from 'js-cookie';
 import { ContextType, WalletState } from './types';
 import { formatBalance } from './utils';
 import detectEthereumProvider from '@metamask/detect-provider';
@@ -112,6 +113,27 @@ export const ContextProvider = ({
 		}
 		setIsConnecting(false);
 	};
+
+	useEffect(() => {
+		return () => {
+			if (wallet?.accounts?.[0]) {
+				const date = new Date();
+				const dateString = `${date.getFullYear()}-${`${
+					date.getMonth() + 1
+				}`.padStart(2, '0')}-${`${date.getDate()}`.padStart(
+					2,
+					'0'
+				)} ${`${date.getHours()}`.padStart(
+					2,
+					'0'
+				)}:${`${date.getMinutes()}`.padStart(
+					2,
+					'0'
+				)}:${`${date.getSeconds()}`.padStart(2, '0')}`;
+				Cookies.set('lastEnter', dateString);
+			}
+		};
+	}, []);
 
 	const store = {
 		theme: { value: isLight, setValue: toggleTheme },

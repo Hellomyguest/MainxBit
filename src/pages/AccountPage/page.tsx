@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import Cookies from 'js-cookie';
 import { HomeOutlined } from '@ant-design/icons';
 import { DropdownMenu } from '../MainPage/ui/MainBlock/ui/DropdownMenu/DropdownMenu';
 import styles from './page.module.css';
@@ -15,14 +16,23 @@ import { ethers } from 'ethers';
 import { useResize } from '../../shared/utils/useResize';
 import { Logo, Logo_light } from '../MainPage/ui/MainBlock/lib';
 
+export type ReferralsType = {
+	firstLevel: number[];
+	secondLevel: number[];
+};
+
 const provider = new ethers.BrowserProvider(window.ethereum);
 // const signer = await provider.getSigner();
 const contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
 
+const lastEnter = Cookies.get('lastEnter');
+
 export const AccountPage = () => {
 	const context = useStore();
+	const [referrals, setReferrals] = useState<ReferralsType>();
+	const [price, setPrice] = useState<number>();
 	const { isScreenMd } = useResize();
-	const refText = 'http://project7546596.tilda.ws/3';
+	const refText = `https://mainxbit.com/${context?.MetaMask?.wallet?.accounts[0]}`;
 	const navigate = useNavigate();
 	const [isNotificationShown, setNotificationShown] = useState(false);
 
@@ -34,23 +44,35 @@ export const AccountPage = () => {
 	};
 
 	useEffect(() => {
-		const getReferals = async () => {
+		const getReferrals = async () => {
 			const response = await contract.getReferals();
-			console.log(response);
-			console.log(Object.entries(response));
+			const referrals = Object.values(response) as number[];
+			const firstLevel = referrals.slice(0, 2).map((bigInt) => Number(bigInt));
+			const secondLevel = referrals.slice(2).map((bigInt) => Number(bigInt));
+			setReferrals({
+				firstLevel: firstLevel.concat(firstLevel[1] * 0.1),
+				secondLevel: secondLevel.concat(secondLevel[1] * 0.05),
+			});
 		};
-		getReferals();
+		const getPrice = async () => {
+			const response = await contract.price();
+			if (response) {
+				setPrice(Number(response) * 0.001);
+			}
+		};
+		getReferrals();
+		getPrice();
 	}, []);
 
 	return context?.MetaMask?.wallet?.accounts.length ? (
 		<div className={styles._}>
 			<div className={styles.wrapper}>
-				{isScreenMd && <Account />}
+				{isScreenMd && <Account price={price} />}
 				<div className={styles.content}>
 					<div className={styles.header}>
 						{isScreenMd ? (
 							<span className={styles.lastEnter}>
-								Время последнего входа - 2023-04-24 20:58:11
+								{lastEnter && `Время последнего входа - ${lastEnter}`}
 							</span>
 						) : context?.theme?.value ? (
 							<Logo_light className={styles.content__logo} />
@@ -67,7 +89,7 @@ export const AccountPage = () => {
 							/>
 						</div>
 					</div>
-					{!isScreenMd && <Account />}
+					{!isScreenMd && <Account price={price} />}
 					<div className={styles.referral}>
 						<h3 className={styles.referral__title}>Реферальная программа</h3>
 						<div className={styles.referral__wrapper}>
@@ -88,7 +110,7 @@ export const AccountPage = () => {
 						</div>
 					</div>
 					<ReferralMessage refText={refText} />
-					<Levels />
+					<Levels referrals={referrals} />
 				</div>
 			</div>
 		</div>

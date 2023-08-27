@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import clsx from 'clsx';
 import styles from './Levels.module.css';
 import { Context } from '../../../../shared/store/ContextProvider';
+import { ReferralsType } from '../../page';
 
 const LevelCard = ({
 	text,
@@ -26,7 +27,13 @@ const levels = [
 	'Ваше партнерское вознаграждение (10%)',
 ];
 
-export const Levels = () => {
+const secondLevels = [
+	'Количество ваших рефералов',
+	'Количество приобретенных ими токенов',
+	'Ваше партнерское вознаграждение (5%)',
+];
+
+export const Levels = ({ referrals }: { referrals?: ReferralsType }) => {
 	const context = useContext(Context);
 
 	return (
@@ -36,11 +43,11 @@ export const Levels = () => {
 					10% первый уровень
 				</div>
 				<div className={styles.levels}>
-					{levels.map((level) => (
+					{levels.map((level, index) => (
 						<LevelCard
 							key={'firstLevel' + level}
 							text={level}
-							count={999}
+							count={referrals?.firstLevel?.[index] || 0}
 							className={clsx({
 								[styles.levelCard_dark]: !context?.theme?.value,
 							})}
@@ -53,11 +60,11 @@ export const Levels = () => {
 					5% первый уровень
 				</div>
 				<div className={styles.levels}>
-					{levels.map((level) => (
+					{secondLevels.map((level, index) => (
 						<LevelCard
 							key={'secondLevel' + level}
 							text={level}
-							count={999}
+							count={referrals?.secondLevel?.[index] || 0}
 							className={clsx({
 								[styles.levelCard_dark]: !context?.theme?.value,
 							})}
