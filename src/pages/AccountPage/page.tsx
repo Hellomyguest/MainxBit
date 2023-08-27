@@ -30,7 +30,6 @@ const lastEnter = Cookies.get('lastEnter');
 export const AccountPage = () => {
 	const context = useStore();
 	const [referrals, setReferrals] = useState<ReferralsType>();
-	const [price, setPrice] = useState<number>();
 	const { isScreenMd } = useResize();
 	const refText = `https://mainxbit.com/${context?.MetaMask?.wallet?.accounts[0]}`;
 	const navigate = useNavigate();
@@ -54,20 +53,13 @@ export const AccountPage = () => {
 				secondLevel: secondLevel.concat(secondLevel[1] * 0.05),
 			});
 		};
-		const getPrice = async () => {
-			const response = await contract.price();
-			if (response) {
-				setPrice(Number(response) * 0.001);
-			}
-		};
 		getReferrals();
-		getPrice();
 	}, []);
 
 	return context?.MetaMask?.wallet?.accounts.length ? (
 		<div className={styles._}>
 			<div className={styles.wrapper}>
-				{isScreenMd && <Account price={price} />}
+				{isScreenMd && <Account />}
 				<div className={styles.content}>
 					<div className={styles.header}>
 						{isScreenMd ? (
@@ -89,7 +81,7 @@ export const AccountPage = () => {
 							/>
 						</div>
 					</div>
-					{!isScreenMd && <Account price={price} />}
+					{!isScreenMd && <Account />}
 					<div className={styles.referral}>
 						<h3 className={styles.referral__title}>Реферальная программа</h3>
 						<div className={styles.referral__wrapper}>
