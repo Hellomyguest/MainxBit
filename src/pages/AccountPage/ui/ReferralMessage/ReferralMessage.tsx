@@ -72,14 +72,12 @@ export const ReferralMessage = ({ refText }: { refText: string }) => {
 					/>
 				))}
 			</div>
-			<div className={clsx(styles.textWrapper, {
-						[styles.textWrapper_light]: context?.theme?.value,
-					})}>
-				<span
-					className={styles.textWrapper__ref}
-				>
-					{refText}
-				</span>
+			<div
+				className={clsx(styles.textWrapper, {
+					[styles.textWrapper_light]: context?.theme?.value,
+				})}
+			>
+				<span className={styles.textWrapper__ref}>{refText}</span>
 				<textarea
 					onChange={handleTextAreaChange}
 					className={styles.textArea}
@@ -88,49 +86,51 @@ export const ReferralMessage = ({ refText }: { refText: string }) => {
 			</div>
 			<div className={styles.sendWrapper}>
 				<h3 className={styles.title}>Отправить через:</h3>
-				<Button
-					type="icon"
-					onClick={() => {
-						window.open(
-							`https://telegram.me/share/url?url=${refText}&text=${textAreaValue}`,
-							'_blank'
-						);
-					}}
-				>
-					<TelegramIcon />
-				</Button>
-				<Button
-					type="icon"
-					onClick={() => {
-						window.open(
-							`viber://pa?&text=${refText + textAreaValue}`,
-							'_blank'
-						);
-					}}
-				>
-					<ViberIcon style={{ height: '100%', width: 'auto' }} />
-				</Button>
-				<Button
-					type="icon"
-					onClick={() => {
-						{
+				<div className={styles.buttonWrapper}>
+					<Button
+						type="icon"
+						onClick={() => {
 							window.open(
-								`whatsapp://send?text=${refText + textAreaValue}`,
+								`https://telegram.me/share/url?url=${refText}&text=${textAreaValue}`,
 								'_blank'
 							);
-						}
-					}}
-				>
-					<WhatsupIcon />
-				</Button>
-				<Button
-					type="icon"
-					onClick={() => {
-						navigator.share({ url: refText, text: textAreaValue });
-					}}
-				>
-					<SmsIcon />
-				</Button>
+						}}
+					>
+						<TelegramIcon />
+					</Button>
+					<Button
+						type="icon"
+						onClick={() => {
+							window.open(
+								`viber://pa?&text=${refText + textAreaValue}`,
+								'_blank'
+							);
+						}}
+					>
+						<ViberIcon style={{ height: '100%', width: 'auto' }} />
+					</Button>
+					<Button
+						type="icon"
+						onClick={() => {
+							{
+								window.open(
+									`whatsapp://send?text=${refText + textAreaValue}`,
+									'_blank'
+								);
+							}
+						}}
+					>
+						<WhatsupIcon />
+					</Button>
+					<Button
+						type="icon"
+						onClick={() => {
+							navigator.share({ url: refText, text: textAreaValue });
+						}}
+					>
+						<SmsIcon />
+					</Button>
+				</div>
 			</div>
 		</div>
 	);

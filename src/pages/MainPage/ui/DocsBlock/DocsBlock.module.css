@@ -5,28 +5,21 @@
 
 .container {
 	position: relative;
-	width: 1278px;
-	height: 307px;
+	width: 76.5625rem;
 	display: flex;
-	margin-bottom: 55px;
+	padding-bottom: 3.4375rem;
 }
 
 .content {
 	height: 100%;
-	width: 750px;
-	margin-left: 84.5px;
+	width: 46.875rem;
+	margin-left: 5.25rem;
 	display: flex;
 	flex-direction: column;
 }
 
 .title {
-	font-family: MontserratBold;
-	font-size: 50px;
-	font-weight: 700;
-	line-height: 61px;
-	letter-spacing: 0em;
-	text-align: center;
-	margin: 0 0 40px;
+	margin: 0 0 2.5rem;
 	transform: translateX(-100%);
 	transition: all 1s;
 }
@@ -37,17 +30,17 @@
 
 .text {
 	font-family: MontserratRegullar;
-	font-size: 20px;
+	font-size: 1.25rem;
 	font-weight: 400;
-	line-height: 26px;
+	line-height: 130%;
 	letter-spacing: 0em;
 	text-align: left;
 }
 
 .buttonWrapper {
-	margin-top: 68.5px;
+	margin-top: 4.25rem;
 	display: flex;
-	gap: 14px;
+	gap: 0.875rem;
 }
 
 .button {
@@ -63,4 +56,64 @@
 	position: absolute;
 	right: 0;
 	bottom: 0;
+}
+
+@media (max-width: 1250px) {
+	._ {
+		padding-inline: 1.5625rem;
+	}
+	.container {
+		width: 100%;
+	}
+	.content {
+		width: auto;
+		flex: 1 1;
+	}
+}
+
+@media (max-width: 1250px) {
+	.content {
+		margin-left: 1.25rem;
+	}
+}
+
+@media (max-width: 968px) {
+	.container {
+		padding-top: 2.5rem;
+		border-left: 1px solid #f5bd00;
+		border-right: 1px solid #f5bd00;
+	}
+	.content {
+		align-items: center;
+		gap: 2rem;
+	}
+	.title {
+		margin-bottom: 0;
+	}
+	.buttonWrapper {
+		margin-top: 0;
+	}
+}
+
+@media (max-width: 800px) {
+	.document {
+		width: 10rem;
+		height: auto;
+	}
+}
+
+@media (max-width: 576px) {
+	.container {
+		padding-bottom: 1.5625rem;
+	}
+	.document {
+		width: 6.25rem;
+	}
+	.text {
+		font-size: 1rem;
+	}
+	.buttonWrapper {
+		flex-direction: column;
+		align-items: center;
+	}
 }

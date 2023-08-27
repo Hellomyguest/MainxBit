@@ -44,24 +44,24 @@ span {
 }
 
 h1 {
-	font-size: 3.2em;
+	font-size: 3.2rem;
 	line-height: 1.1;
 }
 
 h2 {
 	font-family: MontserratBold;
-	font-size: 50px;
+	font-size: 3.125rem;
 	font-weight: 700;
-	line-height: 61px;
+	line-height: 120%;
 	letter-spacing: 0em;
 	text-align: center;
 }
 
 h3 {
 	font-family: MontserratSemiBold;
-	font-size: 25px;
+	font-size: 1.5625rem;
 	font-weight: 600;
-	line-height: 32px;
+	line-height: 125%;
 	letter-spacing: 0em;
 	text-align: center;
 	margin: 0;
@@ -97,4 +97,22 @@ h3 {
 ::-webkit-scrollbar-thumb {
 	background-color: #505050;
 	border-radius: 10px;
+}
+
+@media (max-width: 800px) {
+	h2 {
+		font-size: 2rem;
+	}
+	h3 {
+		font-size: 1.3rem;
+	}
+}
+
+@media (max-width: 576px) {
+	h2 {
+		font-size: 1.5625rem;
+	}
+	h3 {
+		font-size: 1.125rem;
+	}
 }

@@ -48,3 +48,62 @@
 .ant-carousel .slick-next:hover {
 	right: 230px;
 }
+
+@media (max-width: 968px) {
+	.ant-carousel .slick-prev,
+	.ant-carousel .slick-prev:hover {
+		left: 145px;
+	}
+
+	.ant-carousel .slick-next,
+	.ant-carousel .slick-next:hover {
+		right: 145px;
+	}
+}
+
+@media (max-width: 680px) {
+	.ant-carousel .slick-prev,
+	.ant-carousel .slick-prev:hover {
+		left: 90px;
+	}
+
+	.ant-carousel .slick-next,
+	.ant-carousel .slick-next:hover {
+		right: 90px;
+	}
+}
+
+@media (max-width: 576px) {
+	.ant-carousel .slick-dots {
+		margin-top: 14px;
+	}
+	.ant-carousel .slick-prev,
+	.ant-carousel .slick-prev:hover {
+		left: 55px;
+		bottom: -5px;
+		height: 15px;
+	}
+
+	.ant-carousel .slick-next,
+	.ant-carousel .slick-next:hover {
+		right: 55px;
+		bottom: -5px;
+		height: 15px;
+	}
+	.ant-carousel .slick-dots li.slick-active {
+		width: 7px;
+	}
+	.ant-carousel .slick-dots li.slick-active button {
+		width: 7px;
+		height: 7px;
+		transform: translateY(-1px);
+	}
+	.ant-carousel .slick-dots li {
+		width: 5px;
+		height: 5px;
+	}
+	.ant-carousel .slick-dots li button {
+		width: 5px;
+		height: 5px;
+	}
+}

@@ -7,12 +7,13 @@
 	color: var(--primary-button-color);
 	border: 1px solid #f5bd00;
 	font-family: MontserratBold;
-	font-size: 20px;
+	font-size: 1.25rem;
 	font-weight: 700;
-	line-height: 26px;
+	line-height: 125%;
 	letter-spacing: 0em;
 	text-align: center;
 	cursor: pointer;
+	text-transform: uppercase;
 }
 
 .icon {
@@ -38,4 +39,11 @@
 
 .text:hover {
 	background-color: transparent;
+}
+
+@media (max-width: 968px) {
+	._ {
+		height: 40px;
+		font-size: 1.125rem;
+	}
 }

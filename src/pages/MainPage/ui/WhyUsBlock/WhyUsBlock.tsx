@@ -10,6 +10,8 @@ import { ReactComponent as NetRight } from './lib/netRight.svg';
 import { Tree3, Tree4 } from '../../../../shared/ui/PageLayout/lib';
 import styles from './WhyUsBlock.module.css';
 import clsx from 'clsx';
+import { useResize } from '../../../../shared/utils/useResize';
+import { useStore } from '../../../../shared/store/ContextProvider';
 
 const reasons = [
 	'Безопасность',
@@ -40,9 +42,15 @@ const Reason = ({ children }: { children: string }) => (
 	</div>
 );
 
-const Benefit = ({ children }: { children: string }) => (
-	<div className={styles.benefit}>
-		<span>{children}</span>
+const Benefit = ({
+	children,
+	isDark,
+}: {
+	children: string;
+	isDark: boolean;
+}) => (
+	<div className={clsx(styles.benefit, { [styles.benefit_dark]: isDark })}>
+		{children}
 	</div>
 );
 
@@ -74,10 +82,14 @@ const ArrowRightComponent = ({
 );
 
 export const WhyUsBlock = () => {
+	const { isScreenMd } = useResize();
+	const context = useStore();
 	return (
 		<div className={styles._}>
-			<NetLeft className={clsx(styles.net, styles.net_left)} />
-			<NetRight className={clsx(styles.net, styles.net_right)} />
+			{isScreenMd && <NetLeft className={clsx(styles.net, styles.net_left)} />}
+			{isScreenMd && (
+				<NetRight className={clsx(styles.net, styles.net_right)} />
+			)}
 			<div className={styles.container}>
 				<InView>
 					{({ inView, ref }) => (
@@ -101,16 +113,18 @@ export const WhyUsBlock = () => {
 						arrows
 						prevArrow={<ArrowLeftComponent />}
 						nextArrow={<ArrowRightComponent />}
-						autoplay
+						/* autoplay */
 					>
 						{benefits.map((item) => (
-							<Benefit key={item}>{item}</Benefit>
+							<Benefit key={item} isDark={!context?.theme?.value}>
+								{item}
+							</Benefit>
 						))}
 					</Carousel>
 				</div>
 				<Faq className={styles.faq} />
 				<div className={styles.trees}>
-					<TreeStory />
+					<TreeStory className={styles.treeStory} />
 					<Tree3 className={styles.tree} />
 					<Tree4 className={styles.tree} />
 				</div>

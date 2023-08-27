@@ -2,6 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	width: 100%;
 }
 
 .wrapper {
@@ -9,12 +10,6 @@
 }
 
 .title {
-	font-family: MontserratBold;
-	font-size: 50px;
-	font-weight: 700;
-	line-height: 61px;
-	letter-spacing: 0em;
-	text-align: center;
 	margin: 0 0 47px;
 	transform: translateX(-100%);
 	transition: all 1s;
@@ -28,13 +23,14 @@
 	height: 300px;
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 	gap: 19px;
 	overflow: hidden;
 	transition: height 0.3s;
 }
 
 .gallery_open {
-	height: 600px;
+	height: 603px;
 }
 
 .card {
@@ -49,8 +45,83 @@
 	float: right;
 	margin-top: 10px;
 	color: var(--primary-text-color);
+	text-transform: none;
 }
 
 .button:hover {
 	text-decoration: underline;
+}
+
+@media (max-width: 1250px) {
+	._ {
+		padding-inline: 1.5625rem;
+	}
+	.wrapper {
+		width: 100%;
+	}
+	.gallery {
+		width: 917px;
+	}
+	.gallery_open {
+		height: 914px;
+	}
+}
+
+@media (max-width: 968px) {
+	.wrapper {
+		padding-top: 2.5rem;
+		border-left: 1px solid #f5bd00;
+		border-right: 1px solid #f5bd00;
+	}
+	.gallery {
+		width: 605px;
+	}
+	.gallery_open {
+		height: 1225px;
+	}
+}
+
+@media (max-width: 800px) {
+	.title {
+		margin-bottom: 30px;
+	}
+	.gallery {
+		height: 10rem;
+		width: 518px;
+	}
+	.gallery_open {
+		height: 518px;
+	}
+	.card {
+		width: 10rem;
+		height: 10rem;
+		border-radius: 25px;
+		border-width: 2px;
+	}
+	.button {
+		font-size: 0.875rem;
+	}
+}
+
+@media (max-width: 576px) {
+	.title {
+		margin-bottom: 21px;
+	}
+	.gallery {
+		width: 307px;
+		height: 6.125rem;
+		gap: 6px;
+	}
+	.gallery_open {
+		height: 306px;
+	}
+	.card {
+		width: 6.125rem;
+		height: 6.125rem;
+		border-radius: 20px;
+		border-width: 1px;
+	}
+	.button {
+		margin-top: 0;
+	}
 }

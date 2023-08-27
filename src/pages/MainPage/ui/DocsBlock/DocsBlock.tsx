@@ -4,12 +4,14 @@ import { ReactComponent as Moon } from './lib/moon.svg';
 import styles from './DocsBlock.module.css';
 import { Button } from '../../../../shared/ui/Button/Button';
 import clsx from 'clsx';
+import { useResize } from '../../../../shared/utils/useResize';
 
 export const DocsBlock = () => {
+	const { isScreenMd, isScreenLg } = useResize();
 	return (
 		<div className={styles._}>
 			<div className={styles.container}>
-				<Document />
+				{isScreenMd && <Document />}
 				<div className={styles.content}>
 					<InView>
 						{({ inView, ref }) => (
@@ -23,6 +25,7 @@ export const DocsBlock = () => {
 							</h2>
 						)}
 					</InView>
+					{!isScreenMd && <Document className={styles.document}/>}
 					<span className={styles.text}>
 						Описание всей идеи и логики от создания логотипа до первых
 						зарегистрированных пользователей. Этапы разработки и внедрении
@@ -37,7 +40,7 @@ export const DocsBlock = () => {
 						</Button>
 					</div>
 				</div>
-				<Moon className={styles.moon} />
+				{isScreenLg && <Moon className={styles.moon} />}
 			</div>
 		</div>
 	);

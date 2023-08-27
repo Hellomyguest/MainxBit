@@ -26,20 +26,22 @@ export const TeamBlock = () => {
 						</h2>
 					)}
 				</InView>
-				<div
-					className={clsx(styles.gallery, { [styles.gallery_open]: isOpen })}
-				>
-					{cards.map((item) => (
-						<Card key={item} />
-					))}
+				<div style={{ width: 'fit-content', marginInline: 'auto' }}>
+					<div
+						className={clsx(styles.gallery, { [styles.gallery_open]: isOpen })}
+					>
+						{cards.map((item) => (
+							<Card key={item} />
+						))}
+					</div>
+					<Button
+						type="text"
+						onClick={() => setOpen(!isOpen)}
+						className={styles.button}
+					>
+						{isOpen ? 'Скрыть' : 'Посмотреть все'}
+					</Button>
 				</div>
-				<Button
-					type="text"
-					onClick={() => setOpen(!isOpen)}
-					className={styles.button}
-				>
-					{isOpen ? 'Скрыть' : 'Посмотреть все'}
-				</Button>
 			</div>
 		</div>
 	);

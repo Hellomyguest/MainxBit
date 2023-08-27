@@ -2,14 +2,14 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	width: 100%;
+}
+
+.container {
+	width: 1221px;
 }
 
 .title {
-	font-family: MontserratBold;
-	font-size: 50px;
-	font-weight: 700;
-	line-height: 61px;
-	letter-spacing: 0em;
 	margin: 0 0 24.5px;
 	transform: translateX(-100%);
 	transition: all 1s;
@@ -21,14 +21,13 @@
 
 .text {
 	font-family: MontserratRegular;
-	font-size: 16px;
+	font-size: 1rem;
 	font-weight: 400;
 	line-height: 21px;
 	letter-spacing: 0em;
 }
 
 .confidence {
-	width: 1182px;
 	display: flex;
 	justify-content: space-between;
 }
@@ -39,7 +38,6 @@
 
 .numbers {
 	margin-top: 88px;
-	width: 1221px;
 	height: 437.5px;
 	position: relative;
 }
@@ -51,9 +49,9 @@
 
 .param {
 	font-family: MontserratSemiBold;
-	font-size: 20px;
+	font-size: 1.25rem;
 	font-weight: 600;
-	line-height: 26px;
+	line-height: 130%;
 	letter-spacing: 0em;
 	text-align: left;
 	vertical-align: bottom;
@@ -74,4 +72,73 @@
 	position: absolute;
 	bottom: 0;
 	right: 0;
+}
+
+@media (max-width: 1250px) {
+	._ {
+		padding-inline: 1.5625rem;
+	}
+	.container {
+		width: 100%;
+	}
+	.token {
+		width: 20rem;
+	}
+}
+
+@media (max-width: 968px) {
+	.container {
+		padding-top: 2.5rem;
+		border-left: 1px solid #f5bd00;
+		border-right: 1px solid #f5bd00;
+	}
+	.confidence {
+		flex-direction: column;
+		align-items: center;
+		gap: 2.625rem;
+	}
+	.grid {
+		margin-top: 1.5rem;
+	}
+	.numbers {
+		height: auto;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		gap: 2.5rem;
+	}
+	.titleWrap {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.token {
+		position: initial;
+	}
+}
+
+@media (max-width: 680px) {
+	.description {
+		width: 100%;
+	}
+}
+
+@media (max-width: 576px) {
+	.text {
+		font-size: 0.875rem;
+	}
+	.security {
+		width: 19rem;
+		height: auto;
+	}
+	.param {
+		font-size: 1rem;
+	}
+	.grid {
+		width: auto;
+	}
+	.token {
+		width: 17rem;
+		height: auto;
+	}
 }

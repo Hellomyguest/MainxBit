@@ -1,28 +1,28 @@
 ._ {
-	margin-top: 15px;
-	margin-bottom: 72px;
+	margin-top: 0.9375rem;
+	margin-bottom: 4.5rem;
 	display: flex;
 	flex-direction: column;
-	gap: 15px;
+	gap: 0.9375rem;
 }
 
 .levels {
 	display: flex;
-	gap: 38px;
-	margin-top: 5px;
+	gap: 2.375rem;
+	margin-top: 0.3125rem;
 }
 
 .levelCard {
-	width: 273px;
-	height: 137px;
+	width: 17.0625rem;
+	height: 8.5625rem;
 	border-radius: 8px;
 	border: 1px solid #fd7e14;
 	background-color: #f7f7f7;
-	padding: 18px 18px 7px;
+	padding: 1.125rem 1.125rem 0.4375rem;
 	font-family: MontserratRegular;
-	font-size: 20px;
+	font-size: 1.25rem;
 	font-weight: 400;
-	line-height: 26px;
+	line-height: 130%;
 	letter-spacing: 0em;
 	text-align: left;
 	display: flex;
@@ -37,26 +37,26 @@
 
 .levelCard__count {
 	font-family: MontserratSemiBold;
-	font-size: 25px;
+	font-size: 1.5625rem;
 	font-weight: 600;
-	line-height: 32px;
+	line-height: 130%;
 	letter-spacing: 0em;
 	text-align: right;
 	margin: 0;
 }
 
 .titleWrapper {
-	width: 222px;
-	height: 40px;
+	width: 13.875rem;
+	height: 2.5rem;
 	background-repeat: no-repeat;
 	background-position-y: top;
 	display: flex;
 	align-items: center;
-	padding-left: 5px;
+	padding-left: 0.3125rem;
 	font-family: MontserratRegular;
-	font-size: 20px;
+	font-size: 1.25rem;
 	font-weight: 400;
-	line-height: 26px;
+	line-height: 130%;
 	letter-spacing: 0em;
 	text-align: left;
 }
@@ -67,4 +67,21 @@
 
 .titleWrapper_second {
 	background-image: url('./lib/2.png');
+}
+
+@media (max-width: 1250px) {
+	._ {
+		flex-direction: row;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+	.levels {
+		flex-direction: column;
+	}
+}
+
+@media (max-width: 576px) {
+	.levels {
+		gap: 0.625rem;
+	}
 }

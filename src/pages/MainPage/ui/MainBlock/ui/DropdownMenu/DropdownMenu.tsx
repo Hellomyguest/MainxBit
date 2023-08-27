@@ -3,7 +3,6 @@ import { Button } from '../../../../../../shared/ui/Button/Button';
 import { MenuIcon, MenuIcon_light, MoonIcon, SunIcon } from '../../lib';
 import styles from './DropdownMenu.module.css';
 import { Context } from '../../../../../../shared/store/ContextProvider';
-import { useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import { Tooltip } from 'antd';
 import { Themes } from '../../../../../../shared/store/types';
@@ -12,6 +11,7 @@ type Props = {
 	firstButton?: {
 		icon: React.ReactNode;
 		onClick: () => void;
+		tooltip: string;
 	};
 };
 
@@ -19,8 +19,6 @@ export const DropdownMenu = ({ firstButton }: Props) => {
 	const [isOpen, setOpen] = useState(false);
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const context = useContext(Context);
-	const location = useLocation();
-	const isHome = location?.pathname === '/';
 	const isLight = context?.theme?.value;
 
 	useEffect(() => {
@@ -54,7 +52,7 @@ export const DropdownMenu = ({ firstButton }: Props) => {
 					<Button className={styles.button} onClick={firstButton?.onClick}>
 						<Tooltip
 							placement="left"
-							title={isHome ? 'Личный кабинет' : 'Главная страница'}
+							title={firstButton.tooltip}
 						>
 							{firstButton?.icon}
 						</Tooltip>
@@ -62,7 +60,7 @@ export const DropdownMenu = ({ firstButton }: Props) => {
 				)}
 
 				<Button className={styles.button} onClick={() => {}}>
-					<Tooltip placement="left" title="язык">
+					<Tooltip placement="left" title="язык" className={styles.button__text}>
 						Рус
 					</Tooltip>
 				</Button>

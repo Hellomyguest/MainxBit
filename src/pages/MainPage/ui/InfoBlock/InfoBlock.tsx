@@ -35,7 +35,7 @@ export const InfoBlock = ({
 					которые дают право на получение ежемесячного дохода от монетизации
 					криптобиржи!
 				</span>
-				<Investor />
+				<Investor className={styles.investor}/>
 			</div>
 			<Graph className={styles.info__graph} />
 		</div>

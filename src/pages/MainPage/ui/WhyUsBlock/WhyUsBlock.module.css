@@ -21,13 +21,7 @@
 }
 
 .title {
-	font-family: MontserratBold;
-	font-size: 50px;
-	font-weight: 700;
-	line-height: 61px;
-	letter-spacing: 0em;
-	text-align: center;
-	margin: 0 0 50px;
+	margin: 0 0 5rem;
 	transform: translateX(-100%);
 	transition: all 1s;
 }
@@ -39,21 +33,23 @@
 .container {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	width: 100%;
 }
 
 .reasons {
 	display: flex;
-	gap: 88px;
-	width: fit-content;
-	margin-inline: auto;
+	gap: 5.5rem;
 	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .reason {
-	height: 107px;
+	height: 6.7rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	font-size: 1.25rem;
 }
 
 .tick {
@@ -61,43 +57,122 @@
 }
 
 .carousel {
-	margin: 82px auto 38px;
-	width: 800px;
-	height: 480px;
+	margin: 5.125rem 0 2.375rem;
+	width: 50rem;
+	height: 30rem;
 }
 
 .benefit {
-	height: 400px;
-	padding: 0px 125px 0px 125px;
-	border-radius: 40px;
+	height: 25rem;
+	padding: 0px 7.8125rem 0px;
+	border-radius: 2.5rem;
 	border: 4px solid #f5bd00;
-	background: linear-gradient(180deg, #222222 0%, #353535 100%);
+	background: linear-gradient(180deg, #f8f8f8 0%, #ffffff 100%);
 	font-family: MontserratRegular;
-	font-size: 30px;
+	font-size: 1.875rem;
 	font-weight: 400;
-	line-height: 39px;
+	line-height: 130%;
 	letter-spacing: 0em;
 	text-align: center;
-
 	vertical-align: center;
 	display: flex;
 	align-items: center;
+	color: var(--primary-text-color);
 }
 
-.faq {
-	margin-inline: auto;
+.benefit_dark {
+	background: linear-gradient(180deg, #222222 0%, #353535 100%);
 }
 
 .trees {
-	margin-top: 88px;
-	width: 1144px;
-	height: 396px;
+	margin-top: 5.5rem;
+	width: 71.5rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: end;
 }
 
+.treeStory {
+	width: 57%;
+}
+
 .tree {
-	width: auto;
-	height: 100%;
+	width: 19%;
+	height: auto;
+}
+
+@media (max-width: 1200px) {
+	.trees {
+		width: auto;
+	}
+}
+
+@media (max-width: 968px) {
+	._ {
+		padding-inline: 1.5625rem;
+	}
+	.container {
+		padding-top: 2.5rem;
+		border-left: 1px solid #f5bd00;
+		border-right: 1px solid #f5bd00;
+	}
+	.reasons {
+		gap: 3rem;
+	}
+	.carousel {
+		margin: 82px auto 38px;
+		width: 37.5rem;
+		height: 20rem;
+	}
+
+	.benefit {
+		height: 16.7rem;
+	}
+}
+
+@media (max-width: 800px) {
+	.faq {
+		width: 100%;
+	}
+}
+
+@media (max-width: 680px) {
+	.carousel {
+		width: 31.25rem;
+		height: 18.7rem;
+		margin: 2.75rem auto 0;
+	}
+
+	.benefit {
+		height: 13.8rem;
+		font-size: 1rem;
+		padding-inline: 1rem;
+	}
+}
+
+@media (max-width: 576px) {
+	.title {
+		margin-bottom: 3.125rem;
+	}
+	.carousel {
+		width: 19rem;
+		height: 10rem;
+		margin: 2.75rem auto 0;
+	}
+
+	.benefit {
+		height: 8.375rem;
+		font-size: 0.875rem;
+		padding-inline: 1rem;
+	}
+	.trees {
+		margin-top: 0;
+	}
+	.reason {
+		height: 3.75rem;
+		font-size: 0.875rem;
+	}
+	.tick {
+		width: 3.75rem;
+	}
 }
