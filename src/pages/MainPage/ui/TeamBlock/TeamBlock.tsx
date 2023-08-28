@@ -1,5 +1,6 @@
 import { InView } from 'react-intersection-observer';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './TeamBlock.module.css';
 import clsx from 'clsx';
 import { Button } from '../../../../shared/ui/Button/Button';
@@ -10,6 +11,7 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8];
 
 export const TeamBlock = () => {
 	const [isOpen, setOpen] = useState(false);
+	const { t } = useTranslation();
 
 	return (
 		<div className={styles._}>
@@ -22,7 +24,7 @@ export const TeamBlock = () => {
 								[styles.title_visible]: inView,
 							})}
 						>
-							Наша команда
+							{t('team.title')}
 						</h2>
 					)}
 				</InView>
@@ -39,7 +41,7 @@ export const TeamBlock = () => {
 						onClick={() => setOpen(!isOpen)}
 						className={styles.button}
 					>
-						{isOpen ? 'Скрыть' : 'Посмотреть все'}
+						{isOpen ? t('team.hide') : t('team.view')}
 					</Button>
 				</div>
 			</div>

@@ -1,4 +1,5 @@
 import { InView } from 'react-intersection-observer';
+import { useTranslation } from 'react-i18next';
 import { ReactComponent as Security } from './lib/security.svg';
 import { ReactComponent as Token } from './lib/token.svg';
 import styles from './AboutBlock.module.css';
@@ -8,6 +9,7 @@ import { useResize } from '../../../../shared/utils/useResize';
 
 export const AboutBlock = () => {
 	const { isScreenMd, isScreenSm } = useResize();
+	const { t } = useTranslation();
 	return (
 		<div className={styles._}>
 			<div className={styles.container}>
@@ -21,21 +23,14 @@ export const AboutBlock = () => {
 									})}
 									ref={ref}
 								>
-									О доверии
+									{t('about.title')}
 								</h2>
 							)}
 						</InView>
 						<span className={styles.text}>
-							Наша команда постоянно работает над улучшением и развитием биржи,
-							что обеспечивает стабильный и высокий уровень доходности для
-							держателей AMB токенов. Мы уверены, что наша крипто биржа mainxbit
-							станет лидером на рынке, а вы сможете получать значительные
-							дивиденды благодаря умному выбору вложений в AMB токены.
-							Присоединяйтесь к нам и станьте частью инновационного проекта,
-							который обещает большое будущее!
+							{t('about.text')}
 							<br />
-							<br /> Присоединяйтесь к нам и станьте частью инновационного
-							проекта, который обещает большое будущее!
+							<br /> {t('about.text1')}
 						</span>
 					</div>
 					<Security className={styles.security} />
@@ -53,7 +48,7 @@ export const AboutBlock = () => {
 									marginBottom: isScreenMd ? '50px' : 0,
 								}}
 							>
-								О цифрах
+								{t('about.numbers')}
 							</h2>
 						)}
 					</InView>
@@ -70,14 +65,14 @@ export const AboutBlock = () => {
 						</div>
 						<Row gutter={[8, isScreenSm ? 34 : 18]} className={styles.grid}>
 							<Col span={12}>
-								<span className={styles.param}>Выпущено</span>
+								<span className={styles.param}>{t('about.released')}</span>
 							</Col>
 							<Col span={12}>
 								<span className={styles.stat}>25,000,000 AMB</span>
 							</Col>
 
 							<Col span={12}>
-								<span className={styles.param}>Дивиденды</span>
+								<span className={styles.param}>{t('about.dividends')}</span>
 							</Col>
 							<Col span={12}>
 								<span className={styles.stat}>10 - 35%</span>

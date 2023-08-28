@@ -1,4 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
+import { useTranslation } from 'react-i18next';
 import styles from './MainBlock.module.css';
 import {
 	Moon,
@@ -40,6 +41,7 @@ export const MainBlock = ({
 	setGoingDown: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
 	const progress = 25;
+	const { t } = useTranslation();
 	const { isScreenSm, isScreenMd, isScreenLg } = useResize();
 	const context = useStore();
 	const navigate = useNavigate();
@@ -90,19 +92,19 @@ export const MainBlock = ({
 												onClick: () => {
 													navigate('/account');
 												},
-												tooltip: 'Личный кабинет',
+												tooltip: t('dropdown.account'),
 										  }
 										: {
 												icon: <LoginOutlined />,
 												onClick: () => context?.MetaMask?.connectMetaMask(),
-												tooltip: 'Авторизоваться',
+												tooltip: t('dropdown.signIn'),
 										  }
 								}
 							/>
 						</div>
 					) : (
 						<a href="https://metamask.io" target="_blank">
-							Install MetaMask
+							{t('main.install')}
 						</a>
 					)}
 				</header>
@@ -110,9 +112,9 @@ export const MainBlock = ({
 					<div className={styles.content__leftSide}>
 						{!isScreenMd && (
 							<>
-								<h3 className={styles.bar__title}>Токенов продано</h3>
+								<h3 className={styles.bar__title}>{t('main.sold')}</h3>
 								<ProgressBar progress={progress} />
-								<h3 className={styles.bar__title}>Всего инвесторов</h3>
+								<h3 className={styles.bar__title}>{t('main.total')}</h3>
 								<div className={styles.bar__total}>5000</div>
 								<LogoIcon className={styles.logoIcon} />
 							</>
@@ -121,8 +123,7 @@ export const MainBlock = ({
 							<div className={styles.textWrap}>
 								<h1 className={styles.content__title}>MainX Bit</h1>
 								<span className={styles.content__text}>
-									Купите доле распределительные токены AMB на предварительной
-									продаже по цене $0,25 и получите доход в 14x на IEO!
+								{t('main.text')}
 								</span>
 								<Button
 									onClick={() => {
@@ -141,11 +142,11 @@ export const MainBlock = ({
 						{isScreenMd && (
 							<div className={styles.content__bar}>
 								<div>
-									<h3 className={styles.bar__title}>Токенов продано</h3>
+									<h3 className={styles.bar__title}>{t('main.sold')}</h3>
 									<ProgressBar progress={progress} />
 								</div>
 								<div>
-									<h3 className={styles.bar__title}>Всего инвесторов</h3>
+									<h3 className={styles.bar__title}>{t('main.total')}</h3>
 									<div className={styles.bar__total}>5000</div>
 								</div>
 							</div>

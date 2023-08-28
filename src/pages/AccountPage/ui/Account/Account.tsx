@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ethers } from 'ethers';
 import Cookies from 'js-cookie';
 import styles from './Account.module.css';
@@ -17,7 +18,7 @@ import {
 } from '../../../../shared/store/CONTRACT';
 
 const provider = new ethers.BrowserProvider(window.ethereum);
-const signer = await provider.getSigner();
+const signer = window.ethereum && (await provider.getSigner());
 const contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
 const approveContract = new ethers.Contract(
 	CONTRACT_APPROVE_ADDRESS,
@@ -26,6 +27,7 @@ const approveContract = new ethers.Contract(
 );
 export const Account = () => {
 	const context = useStore();
+	const { t } = useTranslation();
 	const [inputValue, setInputValue] = useState<string>('');
 	const [price, setPrice] = useState<number>();
 	const [isApproved, setApproved] = useState(false);
@@ -37,8 +39,8 @@ export const Account = () => {
 				const ref = Cookies.get('ref');
 
 				const response = ref
-					? await contract.buyToken(ethers.toBigInt(+inputValue), ref)
-					: await contract.buyToken(ethers.toBigInt(+inputValue));
+					? await contract?.buyToken(ethers.toBigInt(+inputValue), ref)
+					: await contract?.buyToken(ethers.toBigInt(+inputValue));
 				console.log(response);
 				setApproved(false);
 			} catch (error) {
@@ -49,7 +51,7 @@ export const Account = () => {
 
 	const approve = async () => {
 		try {
-			const approve = await approveContract.approve(
+			const approve = await approveContract?.approve(
 				CONTRACT_ADDRESS,
 				ethers.toBigInt(+inputValue * 25)
 			);
@@ -61,13 +63,17 @@ export const Account = () => {
 	};
 
 	useEffect(() => {
-		const getPrice = async () => {
-			const response = await contract.price();
-			if (response) {
-				setPrice(Number(response) * 0.001);
-			}
-		};
-		getPrice();
+		try {
+			const getPrice = async () => {
+				const response = await contract?.price();
+				if (response) {
+					setPrice(Number(response) * 0.001);
+				}
+			};
+			getPrice();
+		} catch (error) {
+			console.log('getPriceError', error);
+		}
 	}, []);
 
 	return (
@@ -79,14 +85,14 @@ export const Account = () => {
 				</span>
 			</Tooltip>
 			<div className={styles.wallet}>
-				<h3 className={styles.wallet__title}>Мой кошелек</h3>
-				<span className={styles.wallet__balance}>Баланс: </span>
+				<h3 className={styles.wallet__title}>{t('account.title')}</h3>
+				<span className={styles.wallet__balance}>{t('account.balance')}</span>
 				<span
 					className={styles.wallet__balance_amount}
 				>{`${context?.MetaMask?.wallet.balance} AMB`}</span>
 				<div className={styles.wallet__buy}>
 					<div className={styles.buy__title}>
-						<span className={styles.wallet__balance}>Купить токен</span>
+						<span className={styles.wallet__balance}>{t('account.buy')}</span>
 						<span className={styles.buy__amount}>
 							{price && `1AMB = ${price} USD`}
 						</span>
@@ -113,10 +119,10 @@ export const Account = () => {
 						onClick={isApproved ? buyToken : approve}
 						className={styles.button}
 					>
-						{isApproved ? 'Купить токен' : 'Подтвердить'}
+						{isApproved ? t('account.buy') : t('account.approve')}
 					</Button>
 				</div>
-				<a>Написать в техподдержку</a>
+				<a>{t('account.help')}</a>
 			</div>
 		</div>
 	);

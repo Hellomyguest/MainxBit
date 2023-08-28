@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 import styles from './Levels.module.css';
 import { Context } from '../../../../shared/store/ContextProvider';
@@ -21,26 +22,19 @@ const LevelCard = ({
 	);
 };
 
-const levels = [
-	'Количество ваших рефералов',
-	'Количество приобретенных ими токенов',
-	'Ваше партнерское вознаграждение (10%)',
-];
-
-const secondLevels = [
-	'Количество ваших рефералов',
-	'Количество приобретенных ими токенов',
-	'Ваше партнерское вознаграждение (5%)',
-];
-
 export const Levels = ({ referrals }: { referrals?: ReferralsType }) => {
 	const context = useContext(Context);
+	const { t } = useTranslation();
+
+	const levels = [t('levels.1'), t('levels.2'), t('levels.3')];
+
+	const secondLevels = [t('levels.1'), t('levels.2'), t('levels.4')];
 
 	return (
 		<div className={styles._}>
 			<div>
 				<div className={clsx(styles.titleWrapper, styles.titleWrapper_first)}>
-					10% первый уровень
+					{t('levels.first')}
 				</div>
 				<div className={styles.levels}>
 					{levels.map((level, index) => (
@@ -57,7 +51,7 @@ export const Levels = ({ referrals }: { referrals?: ReferralsType }) => {
 			</div>
 			<div>
 				<div className={clsx(styles.titleWrapper, styles.titleWrapper_second)}>
-					5% первый уровень
+					{t('levels.second')}
 				</div>
 				<div className={styles.levels}>
 					{secondLevels.map((level, index) => (

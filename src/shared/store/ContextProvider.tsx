@@ -82,7 +82,7 @@ export const ContextProvider = ({
 		const getProvider = async () => {
 			const provider = await detectEthereumProvider({ silent: true });
 			setHasProvider(Boolean(provider));
-
+			
 			if (provider) {
 				updateWalletAndAccounts();
 				window.ethereum.on('accountsChanged', updateWallet);

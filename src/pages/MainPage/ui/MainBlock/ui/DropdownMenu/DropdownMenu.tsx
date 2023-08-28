@@ -1,4 +1,4 @@
-import { useState, useContext, useRef, useEffect } from 'react';
+import { useState, useContext, useRef, useEffect, useCallback } from 'react';
 import { Button } from '../../../../../../shared/ui/Button/Button';
 import { MenuIcon, MenuIcon_light, MoonIcon, SunIcon } from '../../lib';
 import styles from './DropdownMenu.module.css';
@@ -6,6 +6,7 @@ import { Context } from '../../../../../../shared/store/ContextProvider';
 import clsx from 'clsx';
 import { Tooltip } from 'antd';
 import { Themes } from '../../../../../../shared/store/types';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
 	firstButton?: {
@@ -16,6 +17,12 @@ type Props = {
 };
 
 export const DropdownMenu = ({ firstButton }: Props) => {
+	const { t, i18n } = useTranslation();
+	const handleChange = useCallback(
+		() => i18n.changeLanguage(i18n.language === 'ru-RU' ? 'en' : 'ru-RU'),
+		[i18n]
+	);
+
 	const [isOpen, setOpen] = useState(false);
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const context = useContext(Context);
@@ -50,18 +57,19 @@ export const DropdownMenu = ({ firstButton }: Props) => {
 			<div className={styles.dropdown}>
 				{firstButton && (
 					<Button className={styles.button} onClick={firstButton?.onClick}>
-						<Tooltip
-							placement="left"
-							title={firstButton.tooltip}
-						>
+						<Tooltip placement="left" title={firstButton.tooltip}>
 							{firstButton?.icon}
 						</Tooltip>
 					</Button>
 				)}
 
-				<Button className={styles.button} onClick={() => {}}>
-					<Tooltip placement="left" title="язык" className={styles.button__text}>
-						Рус
+				<Button className={styles.button} onClick={handleChange}>
+					<Tooltip
+						placement="left"
+						title={t('dropdown.language')}
+						className={styles.button__text}
+					>
+						{i18n.language === 'ru-RU' ? 'En' : 'Рус'}
 					</Tooltip>
 				</Button>
 
@@ -73,7 +81,7 @@ export const DropdownMenu = ({ firstButton }: Props) => {
 				>
 					<Tooltip
 						placement="left"
-						title={isLight ? 'Темная тема' : 'Светлая тема'}
+						title={isLight ? t('dropdown.dark') : t('dropdown.light')}
 					>
 						{isLight ? (
 							<MoonIcon className={styles.icon} />

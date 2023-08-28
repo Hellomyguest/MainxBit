@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Layout } from 'antd';
 import styles from './PageLayout.module.css';
 import {
@@ -19,6 +20,7 @@ const { Content, Footer } = Layout;
 
 export const PageLayout = ({ children }: { children: React.ReactNode }) => {
 	const { isScreenSm, isScreenLg } = useResize();
+	const { t } = useTranslation();
 	return (
 		<Layout className={styles._}>
 			<Content>{children}</Content>
@@ -38,7 +40,7 @@ export const PageLayout = ({ children }: { children: React.ReactNode }) => {
 					<div className={styles.documents}>
 						{!isScreenLg && (
 							<>
-								<Logo className={styles.logo}/>
+								<Logo className={styles.logo} />
 								<div className={styles.socialMedia}>
 									<TelegramIcon />
 									<InstagramIcon />
@@ -57,10 +59,10 @@ export const PageLayout = ({ children }: { children: React.ReactNode }) => {
 						)}
 						<div className={styles.documents__links}>
 							<a href="#" className={styles.link}>
-								Договор оферты
+								{t('footer.contract')}
 							</a>
 							<a href="#" className={styles.link}>
-								Правила конфиденциальности
+								{t('footer.rules')}
 							</a>
 						</div>
 						{!isScreenSm && (

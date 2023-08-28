@@ -1,5 +1,6 @@
 import { InView } from 'react-intersection-observer';
 import { Carousel } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { ReactComponent as Tick } from './lib/Tick.svg';
 import { ReactComponent as ArrowLeft } from './lib/ArrowLeft.svg';
 import { ReactComponent as ArrowRight } from './lib/ArrowRight.svg';
@@ -12,28 +13,6 @@ import styles from './WhyUsBlock.module.css';
 import clsx from 'clsx';
 import { useResize } from '../../../../shared/utils/useResize';
 import { useStore } from '../../../../shared/store/ContextProvider';
-
-const reasons = [
-	'Безопасность',
-	'Надежность',
-	'Производительность',
-	'Совладение',
-	'Реферальная программа',
-];
-
-const benefits = [
-	'Мобильное приложение, доступное как для пользователей Android, так и iOS.',
-	'Маржинальная торговля с ордерами S/L T/P и кредитным плечом.',
-	'Агрегатор ликвидности, включая Binance.',
-	'Модуль добавления токенов ERC20, BEP20, TRC20.',
-	'Интеграция фиатных валют USD, EUR, RUB.',
-	'Реферальная программа для дополнительного заработка.',
-	'Производительность биржи свыше 100 000 транзакций в секунду.',
-	'Повышенная безопасность, чтобы вы могли не переживать о своих средствах.',
-	'Модуль P2P и OTK для безопасных и удобных сделок.',
-	'Стартовая площадка для размещения IEO проектов.',
-	'Спот-торговля на основных криптовалютных парах.',
-];
 
 const Reason = ({ children }: { children: string }) => (
 	<div className={styles.reason}>
@@ -83,7 +62,31 @@ const ArrowRightComponent = ({
 
 export const WhyUsBlock = () => {
 	const { isScreenMd } = useResize();
+	const { t } = useTranslation();
 	const context = useStore();
+
+	const reasons = [
+		t('whyUs.reasons.1'),
+		t('whyUs.reasons.2'),
+		t('whyUs.reasons.3'),
+		t('whyUs.reasons.4'),
+		t('whyUs.reasons.5'),
+	];
+	
+	const benefits = [
+		t('whyUs.benefits.1'),
+		t('whyUs.benefits.2'),
+		t('whyUs.benefits.3'),
+		t('whyUs.benefits.4'),
+		t('whyUs.benefits.5'),
+		t('whyUs.benefits.6'),
+		t('whyUs.benefits.7'),
+		t('whyUs.benefits.8'),
+		t('whyUs.benefits.9'),
+		t('whyUs.benefits.10'),
+		t('whyUs.benefits.11'),
+	];
+
 	return (
 		<div className={styles._}>
 			{isScreenMd && <NetLeft className={clsx(styles.net, styles.net_left)} />}
@@ -99,7 +102,7 @@ export const WhyUsBlock = () => {
 								[styles.title_visible]: inView,
 							})}
 						>
-							Почему мы?
+							{t('whyUs.title')}
 						</h2>
 					)}
 				</InView>

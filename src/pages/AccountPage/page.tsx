@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Cookies from 'js-cookie';
 import { HomeOutlined } from '@ant-design/icons';
 import { DropdownMenu } from '../MainPage/ui/MainBlock/ui/DropdownMenu/DropdownMenu';
@@ -29,6 +30,7 @@ const lastEnter = Cookies.get('lastEnter');
 
 export const AccountPage = () => {
 	const context = useStore();
+	const { t } = useTranslation();
 	const [referrals, setReferrals] = useState<ReferralsType>();
 	const { isScreenMd } = useResize();
 	const refText = `https://mainxbit.com/${context?.MetaMask?.wallet?.accounts[0]}`;
@@ -64,7 +66,7 @@ export const AccountPage = () => {
 					<div className={styles.header}>
 						{isScreenMd ? (
 							<span className={styles.lastEnter}>
-								{lastEnter && `Время последнего входа - ${lastEnter}`}
+								{lastEnter && `${t('accPage.lastEnter')} - ${lastEnter}`}
 							</span>
 						) : context?.theme?.value ? (
 							<Logo_light className={styles.content__logo} />
@@ -76,14 +78,14 @@ export const AccountPage = () => {
 								firstButton={{
 									icon: <HomeOutlined />,
 									onClick: () => navigate('/'),
-									tooltip: 'Главная страница',
+									tooltip: t('dropdown.main'),
 								}}
 							/>
 						</div>
 					</div>
 					{!isScreenMd && <Account />}
 					<div className={styles.referral}>
-						<h3 className={styles.referral__title}>Реферальная программа</h3>
+						<h3 className={styles.referral__title}>{t('accPage.referral')}</h3>
 						<div className={styles.referral__wrapper}>
 							<span
 								ref={referralRef}
@@ -91,7 +93,7 @@ export const AccountPage = () => {
 									[styles.referral__text_light]: context?.theme?.value,
 								})}
 							>
-								{isNotificationShown ? 'Скопировано' : refText}
+								{isNotificationShown ? t('accPage.copy') : refText}
 							</span>
 							<Button
 								onClick={handleClickCopy}
@@ -110,7 +112,7 @@ export const AccountPage = () => {
 		<Empty
 			description={
 				<span>
-					Пройдите авторизацию <a href="/">Главная страница</a>
+					{t('accPage.auth')} <a href="/">{t('dropdown.main')}</a>
 				</span>
 			}
 		/>

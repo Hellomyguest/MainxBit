@@ -1,4 +1,5 @@
 import { InView } from 'react-intersection-observer';
+import { useTranslation } from 'react-i18next';
 import { ReactComponent as Document } from './lib/document.svg';
 import { ReactComponent as Moon } from './lib/moon.svg';
 import styles from './DocsBlock.module.css';
@@ -8,6 +9,7 @@ import { useResize } from '../../../../shared/utils/useResize';
 
 export const DocsBlock = () => {
 	const { isScreenMd, isScreenLg } = useResize();
+	const { t } = useTranslation();
 	return (
 		<div className={styles._}>
 			<div className={styles.container}>
@@ -21,15 +23,13 @@ export const DocsBlock = () => {
 									[styles.title_visible]: inView,
 								})}
 							>
-								White paper и One pager
+								{t('docs.title')}
 							</h2>
 						)}
 					</InView>
-					{!isScreenMd && <Document className={styles.document}/>}
+					{!isScreenMd && <Document className={styles.document} />}
 					<span className={styles.text}>
-						Описание всей идеи и логики от создания логотипа до первых
-						зарегистрированных пользователей. Этапы разработки и внедрении
-						инвестиций. Также описание проекта на одной странице.
+						{t('docs.text')}
 					</span>
 					<div className={styles.buttonWrapper}>
 						<Button className={styles.button} onClick={() => {}}>

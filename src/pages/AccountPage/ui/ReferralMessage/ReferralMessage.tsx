@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 import styles from './ReferralMessage.module.css';
 import { Button } from '../../../../shared/ui/Button/Button';
@@ -27,37 +28,36 @@ const ExampleCard = ({
 	</div>
 );
 
-const examples = [
-	{
-		title: 'Шаблонный текст 1',
-		text: 'Лишь базовые сценарии поведения пользователей заблокированы в рамках своих собственных рациональных ограничений. Равным образом, понимание сути ресурсосберегающих технологий предполагает независимые способы реализации поэтапного и последовательного развития общества!',
-	},
-	{
-		title: 'Шаблонный текст 2',
-		text: 'Лишь базовые сценарии поведения пользователей заблокированы в рамках своих собственных рациональных ограничений. Равным образом, понимание сути ресурсосберегающих технологий предполагает независимые способы реализации поэтапного и последовательного развития общества!',
-	},
-	{
-		title: 'Шаблонный текст 3',
-		text: 'Лишь базовые сценарии поведения пользователей заблокированы в рамках своих собственных рациональных ограничений. Равным образом, понимание сути ресурсосберегающих технологий предполагает независимые способы реализации поэтапного и последовательного развития общества!',
-	},
-];
-
 export const ReferralMessage = ({ refText }: { refText: string }) => {
 	const context = useContext(Context);
+	const { t } = useTranslation();
 	const [activeMessage, setActiveMessage] = useState({
-		title: 'Шаблонный текст 1',
-		text: 'Лишь базовые сценарии поведения пользователей заблокированы в рамках своих собственных рациональных ограничений. Равным образом, понимание сути ресурсосберегающих технологий предполагает независимые способы реализации поэтапного и последовательного развития общества!',
+		title: t('refMessage.1.title'),
+		text: t('refMessage.1.text'),
 	});
 	const [textAreaValue, setTextAreaValue] = useState(activeMessage.text);
 
 	const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
 		setTextAreaValue(e.target.value);
 
+	const examples = [
+		{
+			title: t('refMessage.1.title'),
+			text: t('refMessage.1.text'),
+		},
+		{
+			title: t('refMessage.2.title'),
+			text: t('refMessage.2.text'),
+		},
+		{
+			title: t('refMessage.3.title'),
+			text: t('refMessage.3.text'),
+		},
+	];
+
 	return (
 		<div className={styles._}>
-			<h3 className={styles.title}>
-				Выберете один из вариантов текста или напишите свой
-			</h3>
+			<h3 className={styles.title}>{t('refMessage.title')}</h3>
 			<div className={styles.message__examples}>
 				{examples.map((example) => (
 					<ExampleCard
@@ -85,7 +85,7 @@ export const ReferralMessage = ({ refText }: { refText: string }) => {
 				/>
 			</div>
 			<div className={styles.sendWrapper}>
-				<h3 className={styles.title}>Отправить через:</h3>
+				<h3 className={styles.title}>{t('refMessage.send')}</h3>
 				<div className={styles.buttonWrapper}>
 					<Button
 						type="icon"
