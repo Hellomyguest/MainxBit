@@ -119,4 +119,13 @@
 		width: 8rem;
 		height: auto;
 	}
+	.referral__text {
+		font-size: 0.8rem;
+	}
+}
+
+@media (max-width: 410px) {
+	.referral__text {
+		font-size: 0.7rem;
+	}
 }

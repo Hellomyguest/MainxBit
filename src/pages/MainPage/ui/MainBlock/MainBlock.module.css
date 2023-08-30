@@ -273,6 +273,10 @@
 		font-size: 0.875rem;
 	}
 
+	.logoIcon {
+		width: 9rem;
+	}
+
 	.moon {
 		top: 0;
 	}

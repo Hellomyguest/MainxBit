@@ -16,6 +16,7 @@ import { CONTRACT_ABI, CONTRACT_ADDRESS } from '../../shared/store/CONTRACT';
 import { ethers } from 'ethers';
 import { useResize } from '../../shared/utils/useResize';
 import { Logo, Logo_light } from '../MainPage/ui/MainBlock/lib';
+import { formatAddress } from '../../shared/store/utils';
 
 export type ReferralsType = {
 	firstLevel: number[];
@@ -32,8 +33,12 @@ export const AccountPage = () => {
 	const context = useStore();
 	const { t } = useTranslation();
 	const [referrals, setReferrals] = useState<ReferralsType>();
-	const { isScreenMd } = useResize();
+	const { isScreenMd, isScreenLg } = useResize();
 	const refText = `https://mainxbit.com/${context?.MetaMask?.wallet?.accounts[0]}`;
+	const shortRef = `https://mainxbit.com/${
+		context?.MetaMask?.wallet?.accounts[0] &&
+		formatAddress(context?.MetaMask?.wallet?.accounts[0])
+	}`;
 	const navigate = useNavigate();
 	const [isNotificationShown, setNotificationShown] = useState(false);
 
@@ -93,7 +98,7 @@ export const AccountPage = () => {
 									[styles.referral__text_light]: context?.theme?.value,
 								})}
 							>
-								{isNotificationShown ? t('accPage.copy') : refText}
+								{isNotificationShown ? t('accPage.copy') : isScreenLg ? refText : shortRef}
 							</span>
 							<Button
 								onClick={handleClickCopy}
