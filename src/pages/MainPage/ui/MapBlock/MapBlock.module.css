@@ -27,11 +27,3 @@
 		height: auto;
 	}
 }
-
-@media (max-width: 968px) {
-	.container {
-		padding-top: 2.5rem;
-		border-left: 1px solid #f5bd00;
-		border-right: 1px solid #f5bd00;
-	}
-}

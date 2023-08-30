@@ -1,8 +1,11 @@
 import React, { useState, useCallback, useEffect, useContext } from 'react';
 import Cookies from 'js-cookie';
+import { useTranslation } from 'react-i18next';
+import { Modal } from 'antd';
 import { ContextType, WalletState } from './types';
 import { formatBalance } from './utils';
 import detectEthereumProvider from '@metamask/detect-provider';
+import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -20,6 +23,8 @@ export const ContextProvider = ({
 	children: React.ReactNode;
 }) => {
 	const [isLight, setLigth] = useState(!defaultDark);
+	const [modal, contextHolder] = Modal.useModal();
+	const { t } = useTranslation();
 
 	function toggleTheme(themeColor: string) {
 		if (themeColor === 'dark') {
@@ -36,6 +41,10 @@ export const ContextProvider = ({
 			setLigth(true);
 		}
 	}
+
+	useEffect(() => {
+		toggleTheme(!isLight ? 'light' : 'dark');
+	}, []);
 
 	const [hasProvider, setHasProvider] = useState<boolean | null>(null);
 
@@ -82,7 +91,7 @@ export const ContextProvider = ({
 		const getProvider = async () => {
 			const provider = await detectEthereumProvider({ silent: true });
 			setHasProvider(Boolean(provider));
-			
+
 			if (provider) {
 				updateWalletAndAccounts();
 				window.ethereum.on('accountsChanged', updateWallet);
@@ -107,9 +116,19 @@ export const ContextProvider = ({
 			});
 			clearError();
 			updateWallet(accounts);
+			modal.warning({
+				title: t('modal.signed'),
+				icon: <CheckCircleOutlined />,
+				okText: 'Вернуться',
+			});
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (err: any) {
 			setErrorMessage(err.message);
+			modal.error({
+				title: err.message,
+				icon: <CloseCircleOutlined />,
+				okText: 'Вернуться',
+			});
 		}
 		setIsConnecting(false);
 	};
@@ -148,7 +167,12 @@ export const ContextProvider = ({
 		},
 	};
 
-	return <Context.Provider value={store}>{children}</Context.Provider>;
+	return (
+		<Context.Provider value={store}>
+			{contextHolder}
+			{children}
+		</Context.Provider>
+	);
 };
 
 export const useStore = () => {

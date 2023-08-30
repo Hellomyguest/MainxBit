@@ -1,11 +1,11 @@
 import { useState, useContext, useRef, useEffect, useCallback } from 'react';
-import { Button } from '../../../../../../shared/ui/Button/Button';
-import { MenuIcon, MenuIcon_light, MoonIcon, SunIcon } from '../../lib';
+import { Button } from '../Button/Button';
+import { MenuIcon, MenuIcon_light, MoonIcon, SunIcon } from '../../../pages/MainPage/ui/MainBlock/lib';
 import styles from './DropdownMenu.module.css';
-import { Context } from '../../../../../../shared/store/ContextProvider';
+import { Context } from '../../store/ContextProvider';
 import clsx from 'clsx';
 import { Tooltip } from 'antd';
-import { Themes } from '../../../../../../shared/store/types';
+import { Themes } from '../../store/types';
 import { useTranslation } from 'react-i18next';
 
 type Props = {

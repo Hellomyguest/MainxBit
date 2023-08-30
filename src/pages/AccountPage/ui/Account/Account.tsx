@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Modal } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { ethers } from 'ethers';
 import Cookies from 'js-cookie';
@@ -16,18 +17,12 @@ import {
 	CONTRACT_APPROVE_ABI,
 	CONTRACT_APPROVE_ADDRESS,
 } from '../../../../shared/store/CONTRACT';
+import { CloseCircleOutlined } from '@ant-design/icons';
 
-const provider = new ethers.BrowserProvider(window.ethereum);
-const signer = window.ethereum && (await provider.getSigner());
-const contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
-const approveContract = new ethers.Contract(
-	CONTRACT_APPROVE_ADDRESS,
-	CONTRACT_APPROVE_ABI,
-	signer
-);
 export const Account = () => {
 	const context = useStore();
 	const { t } = useTranslation();
+	const [modal, contextHolder] = Modal.useModal();
 	const [inputValue, setInputValue] = useState<string>('');
 	const [price, setPrice] = useState<number>();
 	const [isApproved, setApproved] = useState(false);
@@ -37,47 +32,84 @@ export const Account = () => {
 		if (inputValue && +inputValue > 0) {
 			try {
 				const ref = Cookies.get('ref');
-
+				const provider = new ethers.BrowserProvider(window.ethereum);
+				const signer = window.ethereum && (await provider.getSigner());
+				const contract = new ethers.Contract(
+					CONTRACT_ADDRESS,
+					CONTRACT_ABI,
+					signer
+				);
 				const response = ref
 					? await contract?.buyToken(ethers.toBigInt(+inputValue), ref)
 					: await contract?.buyToken(ethers.toBigInt(+inputValue));
 				console.log(response);
 				setApproved(false);
-			} catch (error) {
-				console.log(error);
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			} catch (error: any) {
+				modal.error({
+					title: error.reason,
+					icon: <CloseCircleOutlined />,
+					okText: 'Вернуться',
+				});
 			}
 		}
 	};
 
 	const approve = async () => {
 		try {
+			const provider = new ethers.BrowserProvider(window.ethereum);
+			const signer = window.ethereum && (await provider.getSigner());
+			const approveContract = new ethers.Contract(
+				CONTRACT_APPROVE_ADDRESS,
+				CONTRACT_APPROVE_ABI,
+				signer
+			);
+
 			const approve = await approveContract?.approve(
 				CONTRACT_ADDRESS,
 				ethers.toBigInt(+inputValue * 25)
 			);
 			console.log(approve);
 			setApproved(true);
-		} catch (error) {
-			console.log('rejected');
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		} catch (error: any) {
+			modal.error({
+				title: error.reason,
+				icon: <CloseCircleOutlined />,
+				okText: 'Вернуться',
+			});
 		}
 	};
 
 	useEffect(() => {
 		try {
 			const getPrice = async () => {
+				const provider = new ethers.BrowserProvider(window.ethereum);
+				const signer = window.ethereum && (await provider.getSigner());
+				const contract = new ethers.Contract(
+					CONTRACT_ADDRESS,
+					CONTRACT_ABI,
+					signer
+				);
 				const response = await contract?.price();
 				if (response) {
 					setPrice(Number(response) * 0.001);
 				}
 			};
 			getPrice();
-		} catch (error) {
-			console.log('getPriceError', error);
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		} catch (error: any) {
+			modal.error({
+				title: error.reason,
+				icon: <CloseCircleOutlined />,
+				okText: 'Вернуться',
+			});
 		}
 	}, []);
 
 	return (
 		<div className={clsx(styles._, { [styles.dark]: !context?.theme?.value })}>
+			{contextHolder}
 			{context?.theme?.value ? <Logo_light /> : <Logo />}
 			<Tooltip placement="bottom" title={context?.MetaMask?.wallet.accounts[0]}>
 				<span>

@@ -8,6 +8,6 @@
 
 @media (max-width: 968px) {
 	.wrapper {
-		gap: 0;
+		gap: 2.5rem;
 	}
 }

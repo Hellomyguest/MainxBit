@@ -182,8 +182,6 @@
 	}
 	.content {
 		width: 100%;
-		border-left: 1px solid #f5bd00;
-		border-right: 1px solid #f5bd00;
 		margin: 0;
 		padding-top: 1.5625rem;
 		justify-content: flex-start;

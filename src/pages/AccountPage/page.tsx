@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Cookies from 'js-cookie';
 import { HomeOutlined } from '@ant-design/icons';
-import { DropdownMenu } from '../MainPage/ui/MainBlock/ui/DropdownMenu/DropdownMenu';
+import { DropdownMenu } from '../../shared/ui/DropdownMenu/DropdownMenu';
 import styles from './page.module.css';
 import { Account } from './ui/Account/Account';
 import { useNavigate } from 'react-router-dom';

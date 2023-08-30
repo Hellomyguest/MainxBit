@@ -58,11 +58,6 @@
 	._ {
 		padding-inline: 1.5625rem;
 	}
-	.wrapper {
-		padding-top: 2.5rem;
-		border-left: 1px solid #f5bd00;
-		border-right: 1px solid #f5bd00;
-	}
 	.cards {
 		flex-wrap: wrap;
 		justify-content: center;

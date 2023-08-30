@@ -26,12 +26,17 @@ import {
 import { ProgressBar } from './ui/ProgressBar/ProgressBar';
 import { useStore } from '../../../../shared/store/ContextProvider';
 import { Button } from '../../../../shared/ui/Button/Button';
-import { DropdownMenu } from './ui/DropdownMenu/DropdownMenu';
-import { UserOutlined, LoginOutlined } from '@ant-design/icons';
+import { DropdownMenu } from '../../../../shared/ui/DropdownMenu/DropdownMenu';
+import {
+	UserOutlined,
+	LoginOutlined,
+	CloseCircleOutlined,
+} from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import clsx from 'clsx';
 import { useResize } from '../../../../shared/utils/useResize';
+import { Modal } from 'antd';
 
 export const MainBlock = ({
 	isGoingDown,
@@ -41,6 +46,7 @@ export const MainBlock = ({
 	setGoingDown: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
 	const progress = 25;
+	const [modal, contextHolder] = Modal.useModal();
 	const { t } = useTranslation();
 	const { isScreenSm, isScreenMd, isScreenLg } = useResize();
 	const context = useStore();
@@ -58,8 +64,23 @@ export const MainBlock = ({
 		},
 	});
 
+	const signIn = () => {
+		context?.MetaMask?.hasProvider && window.ethereum?.isMetaMask
+			? context?.MetaMask?.connectMetaMask()
+			: modal.error({
+					title: (
+						<a href="https://metamask.io" target="_blank">
+							{t('modal.install')}
+						</a>
+					),
+					icon: <CloseCircleOutlined />,
+					okText: 'Ок',
+			  });
+	};
+
 	return (
 		<div ref={ref} className={styles._}>
+			{contextHolder}
 			{isScreenMd ? (
 				<Moon className={styles.moon} />
 			) : (
@@ -82,31 +103,26 @@ export const MainBlock = ({
 					) : (
 						<Logo className={styles.content__logo} />
 					)}
-					{context?.MetaMask?.hasProvider && window.ethereum?.isMetaMask ? (
-						<div>
-							<DropdownMenu
-								firstButton={
-									context.MetaMask.wallet?.accounts.length
-										? {
-												icon: <UserOutlined />,
-												onClick: () => {
-													navigate('/account');
-												},
-												tooltip: t('dropdown.account'),
-										  }
-										: {
-												icon: <LoginOutlined />,
-												onClick: () => context?.MetaMask?.connectMetaMask(),
-												tooltip: t('dropdown.signIn'),
-										  }
-								}
-							/>
-						</div>
-					) : (
-						<a href="https://metamask.io" target="_blank">
-							{t('main.install')}
-						</a>
-					)}
+
+					<div>
+						<DropdownMenu
+							firstButton={
+								context?.MetaMask.wallet?.accounts.length
+									? {
+											icon: <UserOutlined />,
+											onClick: () => {
+												navigate('/account');
+											},
+											tooltip: t('dropdown.account'),
+									  }
+									: {
+											icon: <LoginOutlined />,
+											onClick: signIn,
+											tooltip: t('dropdown.signIn'),
+									  }
+							}
+						/>
+					</div>
 				</header>
 				<div className={styles.wrapper}>
 					<div className={styles.content__leftSide}>
@@ -122,17 +138,15 @@ export const MainBlock = ({
 						<div style={{ display: 'flex' }}>
 							<div className={styles.textWrap}>
 								<h1 className={styles.content__title}>MainX Bit</h1>
-								<span className={styles.content__text}>
-								{t('main.text')}
-								</span>
+								<span className={styles.content__text}>{t('main.text')}</span>
 								<Button
 									onClick={() => {
 										context?.MetaMask.wallet?.accounts.length
 											? navigate('/account')
-											: context?.MetaMask?.connectMetaMask();
+											: signIn();
 									}}
 								>
-									Купить
+									{t('main.buy')}
 								</Button>
 							</div>
 							{!isScreenLg && isScreenMd && (
