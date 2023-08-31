@@ -45,7 +45,7 @@ export const AccountPage = () => {
 	const referralRef = useRef<HTMLSpanElement | null>(null);
 	const handleClickCopy = () => {
 		setNotificationShown(true);
-		navigator.clipboard.writeText(referralRef?.current?.textContent || '');
+		navigator.clipboard.writeText(refText);
 		setTimeout(() => setNotificationShown(false), 1000);
 	};
 

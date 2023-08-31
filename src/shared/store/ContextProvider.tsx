@@ -22,7 +22,10 @@ export const ContextProvider = ({
 }: {
 	children: React.ReactNode;
 }) => {
-	const [isLight, setLigth] = useState(!defaultDark);
+	const storedTheme = Cookies.get('theme');
+	const [isLight, setLigth] = useState(
+		storedTheme ? storedTheme === 'light' : !defaultDark
+	);
 	const [modal, contextHolder] = Modal.useModal();
 	const { t } = useTranslation();
 
@@ -40,10 +43,11 @@ export const ContextProvider = ({
 			document.body.style.setProperty('--primary-text-color', ' #222222');
 			setLigth(true);
 		}
+		Cookies.set('theme', themeColor);
 	}
 
 	useEffect(() => {
-		toggleTheme(!isLight ? 'light' : 'dark');
+		toggleTheme(isLight ? 'light' : 'dark');
 	}, []);
 
 	const [hasProvider, setHasProvider] = useState<boolean | null>(null);
