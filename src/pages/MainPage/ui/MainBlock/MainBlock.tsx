@@ -45,7 +45,6 @@ export const MainBlock = ({
 	isGoingDown: boolean;
 	setGoingDown: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-	const progress = 25;
 	const [modal, contextHolder] = Modal.useModal();
 	const { t } = useTranslation();
 	const { isScreenSm, isScreenMd, isScreenLg } = useResize();
@@ -129,16 +128,23 @@ export const MainBlock = ({
 						{!isScreenMd && (
 							<>
 								<h3 className={styles.bar__title}>{t('main.sold')}</h3>
-								<ProgressBar progress={progress} />
+								<ProgressBar
+									total={context?.stat?.totalToken || 0}
+									bought={context?.stat?.tokenBought || 0}
+								/>
 								<h3 className={styles.bar__title}>{t('main.total')}</h3>
-								<div className={styles.bar__total}>5000</div>
+								<div className={styles.bar__total}>
+									{context?.stat?.totalUsers}
+								</div>
 								<LogoIcon className={styles.logoIcon} />
 							</>
 						)}
 						<div style={{ display: 'flex' }}>
 							<div className={styles.textWrap}>
 								<h1 className={styles.content__title}>MainX Bit</h1>
-								<span className={styles.content__text}>{t('main.text')}</span>
+								<span className={styles.content__text}>{`${t(
+									'main.text'
+								)}${context?.stat?.price}${t('main.text2')}`}</span>
 								<Button
 									onClick={() => {
 										context?.MetaMask.wallet?.accounts.length
@@ -157,11 +163,16 @@ export const MainBlock = ({
 							<div className={styles.content__bar}>
 								<div>
 									<h3 className={styles.bar__title}>{t('main.sold')}</h3>
-									<ProgressBar progress={progress} />
+									<ProgressBar
+										total={context?.stat?.totalToken || 0}
+										bought={context?.stat?.tokenBought || 0}
+									/>
 								</div>
 								<div>
 									<h3 className={styles.bar__title}>{t('main.total')}</h3>
-									<div className={styles.bar__total}>5000</div>
+									<div className={styles.bar__total}>
+										{context?.stat?.totalUsers}
+									</div>
 								</div>
 							</div>
 						)}

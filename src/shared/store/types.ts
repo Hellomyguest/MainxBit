@@ -27,4 +27,20 @@ export type ContextType = {
 		connectMetaMask: () => void;
 		clearError: () => void;
 	};
+	links: {
+		contract_offer: string;
+		link_instagram: string;
+		link_telegram: string;
+		link_tiktok: string;
+		link_twitter: string;
+		one_pager: string;
+		privacy_policy: string;
+		white_paper: string;
+	};
+	stat: {
+		totalUsers: number;
+		price: string;
+		totalToken: number;
+		tokenBought: number;
+	};
 };

@@ -32,8 +32,9 @@ i18n
 						install: 'Install MetaMask',
 						sold: 'Tokens sold',
 						total: 'Total investors',
-						text: 'Buy share AMB Distribution Tokens in Pre-Sale for $0.25 and Earn 14x on IEO!',
-						buy: 'Buy'
+						text: 'Buy share AMB Distribution Tokens in Pre-Sale for $',
+						text2: ' and Earn 14x on IEO!',
+						buy: 'Buy',
 					},
 					info: {
 						text: 'Do you want to become a member of a project that has a huge potential for development and establishment in the cryptocurrency market? Then you should definitely pay attention to our shares of AMB distribution tokens, which entitle you to receive monthly income from the monetization of the crypto exchange!',
@@ -151,11 +152,13 @@ i18n
 						install: 'Установить MetaMask',
 						sold: 'Токенов продано',
 						total: 'Всего инвесторов',
-						text: 'Купите доле распределительные токены AMB на предварительной продаже по цене $0,25 и получите доход в 14x на IEO!',
-						buy: 'Купить'
+						text: 'Купите доле распределительные токены AMB на предварительной продаже по цене $',
+						text2: ' и получите доход в 14x на IEO!',
+						buy: 'Купить',
 					},
 					info: {
-						text: 'Хотите стать участником проекта, который имеет огромный потенциал для развития и становления на рынке криптовалют? Тогда вам обязательно стоит обратить внимание на наши доле распределительные токены AMB, которые дают право на получение ежемесячного дохода от монетизации криптобиржи!',
+						text1:
+							'Хотите стать участником проекта, который имеет огромный потенциал для развития и становления на рынке криптовалют? Тогда вам обязательно стоит обратить внимание на наши доле распределительные токены AMB, которые дают право на получение ежемесячного дохода от монетизации криптобиржи!',
 					},
 					referral: {
 						title: 'Реферальная программа',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Layout } from 'antd';
+import { Button, Layout } from 'antd';
 import styles from './PageLayout.module.css';
 import {
 	InstagramIcon,
@@ -13,14 +13,18 @@ import {
 	Tree3,
 	Tree4,
 	TwitterIcon,
+	TikTokIcon,
 } from './lib';
 import { useResize } from '../../utils/useResize';
+import { useStore } from '../../store/ContextProvider';
 
 const { Content, Footer } = Layout;
 
 export const PageLayout = ({ children }: { children: React.ReactNode }) => {
 	const { isScreenSm, isScreenLg } = useResize();
 	const { t } = useTranslation();
+	const context = useStore();
+	console.log(context);
 	return (
 		<Layout className={styles._}>
 			<Content>{children}</Content>
@@ -30,9 +34,42 @@ export const PageLayout = ({ children }: { children: React.ReactNode }) => {
 						<div className={styles.footer__logoWrapper}>
 							<Logo />
 							<div className={styles.socialMedia}>
-								<TelegramIcon />
-								<InstagramIcon />
-								<TwitterIcon />
+								{context?.links?.link_telegram && (
+									<Button
+										type="link"
+										icon={<TelegramIcon />}
+										className={styles.link}
+										href={context?.links?.link_telegram}
+										target="_blank"
+									/>
+								)}
+								{context?.links?.link_instagram && (
+									<Button
+										type="link"
+										icon={<InstagramIcon />}
+										className={styles.link}
+										href={context?.links?.link_instagram}
+										target="_blank"
+									/>
+								)}
+								{context?.links?.link_twitter && (
+									<Button
+										type="link"
+										icon={<TwitterIcon />}
+										className={styles.link}
+										href={context?.links?.link_twitter}
+										target="_blank"
+									/>
+								)}
+								{context?.links?.link_tiktok && (
+									<Button
+										type="link"
+										icon={<TikTokIcon />}
+										className={styles.link}
+										href={context?.links?.link_tiktok}
+										target="_blank"
+									/>
+								)}
 							</div>
 						</div>
 					)}
@@ -42,9 +79,42 @@ export const PageLayout = ({ children }: { children: React.ReactNode }) => {
 							<>
 								<Logo className={styles.logo} />
 								<div className={styles.socialMedia}>
-									<TelegramIcon />
-									<InstagramIcon />
-									<TwitterIcon />
+									{context?.links?.link_telegram && (
+										<Button
+											type="link"
+											icon={<TelegramIcon />}
+											className={styles.link}
+											href={context?.links?.link_telegram}
+											target="_blank"
+										/>
+									)}
+									{context?.links?.link_instagram && (
+										<Button
+											type="link"
+											icon={<InstagramIcon />}
+											className={styles.link}
+											href={context?.links?.link_instagram}
+											target="_blank"
+										/>
+									)}
+									{context?.links?.link_twitter && (
+										<Button
+											type="link"
+											icon={<TwitterIcon />}
+											className={styles.link}
+											href={context?.links?.link_twitter}
+											target="_blank"
+										/>
+									)}
+									{context?.links?.link_tiktok && (
+										<Button
+											type="link"
+											icon={<TikTokIcon />}
+											className={styles.link}
+											href={context?.links?.link_tiktok}
+											target="_blank"
+										/>
+									)}
 								</div>
 							</>
 						)}
@@ -58,10 +128,18 @@ export const PageLayout = ({ children }: { children: React.ReactNode }) => {
 							</div>
 						)}
 						<div className={styles.documents__links}>
-							<a href="#" className={styles.link}>
+							<a
+								href={context?.links?.contract_offer || '#'}
+								target="_blank"
+								className={styles.link}
+							>
 								{t('footer.contract')}
 							</a>
-							<a href="#" className={styles.link}>
+							<a
+								href={context?.links?.privacy_policy || '#'}
+								target="_blank"
+								className={styles.link}
+							>
 								{t('footer.rules')}
 							</a>
 						</div>

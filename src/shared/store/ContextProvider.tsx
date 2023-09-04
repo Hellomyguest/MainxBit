@@ -158,6 +158,48 @@ export const ContextProvider = ({
 		};
 	}, []);
 
+	const [siteInfo, setSiteInfo] = useState({
+		contract_offer: '',
+		link_instagram: '',
+		link_telegram: '',
+		link_tiktok: '',
+		link_twitter: '',
+		one_pager: '',
+		privacy_policy: '',
+		white_paper: '/uploads/1.conf',
+	});
+
+	useEffect(() => {
+		const getInfo = async () => {
+			const response = await fetch('https://api.mainxbit.com/get_info');
+			const parsed = await response.json();
+			setSiteInfo(parsed.result);
+		};
+		getInfo();
+	}, []);
+
+	const [stat, setStat] = useState({
+		totalUsers: 0,
+		price: '0,00',
+		totalToken: 0,
+		tokenBought: 0,
+	});
+
+	useEffect(() => {
+		const getStat = async () => {
+			const response = await fetch('https://api.mainxbit.com/get_statistics');
+			const parsed = await response.json();
+			console.log('result', parsed.result);
+			setStat({
+				totalUsers: parsed?.result?.[0] || 0,
+				price: (parsed?.result?.[1] / 1000 || 0).toFixed(2),
+				totalToken: parsed?.result?.[2] || 0,
+				tokenBought: parsed?.result?.[3] || 0,
+			});
+		};
+		getStat();
+	}, []);
+
 	const store = {
 		theme: { value: isLight, setValue: toggleTheme },
 		MetaMask: {
@@ -169,6 +211,8 @@ export const ContextProvider = ({
 			connectMetaMask,
 			clearError,
 		},
+		links: siteInfo,
+		stat,
 	};
 
 	return (

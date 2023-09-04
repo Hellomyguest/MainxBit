@@ -8,3 +8,4 @@ export { ReactComponent as InstagramIcon } from './InstagramIcon.svg';
 export { ReactComponent as TwitterIcon } from './TwitterIcon.svg';
 export { ReactComponent as QR } from './qr.svg';
 export { ReactComponent as Logo } from './MainxbitLogo.svg';
+export {ReactComponent as TikTokIcon} from './TikTokIcon.svg'
