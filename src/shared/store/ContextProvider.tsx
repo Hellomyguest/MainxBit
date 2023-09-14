@@ -6,6 +6,7 @@ import { ContextType, WalletState } from './types';
 import { formatBalance } from './utils';
 import detectEthereumProvider from '@metamask/detect-provider';
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import MetaMaskSDK, { SDKProvider } from '@metamask/sdk';
 
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -22,6 +23,10 @@ export const ContextProvider = ({
 }: {
 	children: React.ReactNode;
 }) => {
+	const [ethereum, setEthereum] = useState<SDKProvider>();
+
+	useEffect(() => {}, []);
+
 	const storedTheme = Cookies.get('theme');
 	const [isLight, setLigth] = useState(
 		storedTheme ? storedTheme === 'light' : !defaultDark
@@ -100,6 +105,19 @@ export const ContextProvider = ({
 				updateWalletAndAccounts();
 				window.ethereum.on('accountsChanged', updateWallet);
 				window.ethereum.on('chainChanged', updateWalletAndAccounts);
+			} else {
+				const MMSDK = new MetaMaskSDK({
+					useDeeplink: false,
+					dappMetadata: {
+						name: 'MainxBit',
+						url: 'https://mainxbit.com/',
+					},
+				});
+				MMSDK.init()
+					.then(() => {
+						const ethereum = MMSDK.getProvider();
+						setEthereum(ethereum);
+					})
 			}
 		};
 
@@ -109,13 +127,13 @@ export const ContextProvider = ({
 			window.ethereum?.removeListener('accountsChanged', updateWallet);
 			window.ethereum?.removeListener('chainChanged', updateWalletAndAccounts);
 		};
-	}, [updateWallet, updateWalletAndAccounts]);
+	}, [updateWallet, updateWalletAndAccounts, ethereum]);
 
 	const connectMetaMask = async () => {
 		setIsConnecting(true);
 
 		try {
-			const accounts = await window.ethereum.request({
+			const accounts = await (ethereum? ethereum : window.ethereum).request({
 				method: 'eth_requestAccounts',
 			});
 			clearError();
@@ -165,8 +183,14 @@ export const ContextProvider = ({
 		link_tiktok: '',
 		link_twitter: '',
 		one_pager: '',
-		privacy_policy: '',
-		white_paper: '/uploads/1.conf',
+		white_paper_RU: '',
+		white_paper_EN: '',
+		one_pager_RU: '',
+		one_pager_EN: '',
+		contract_offer_RU: '',
+		contract_offer_EN: '',
+		privacy_policy_RU: '',
+		privacy_policy_EN: '',
 	});
 
 	useEffect(() => {
@@ -189,7 +213,7 @@ export const ContextProvider = ({
 		const getStat = async () => {
 			const response = await fetch('https://api.mainxbit.com/get_statistics');
 			const parsed = await response.json();
-			console.log('result', parsed.result);
+
 			setStat({
 				totalUsers: parsed?.result?.[0] || 0,
 				price: (parsed?.result?.[1] / 1000 || 0).toFixed(2),
@@ -198,6 +222,79 @@ export const ContextProvider = ({
 			});
 		};
 		getStat();
+	}, []);
+
+	const [team, setTeam] = useState([]);
+
+	useEffect(() => {
+		const getTeam = async () => {
+			const response = await fetch('https://api.mainxbit.com/get_commands');
+			const parsed = await response.json();
+
+			setTeam(parsed.result);
+		};
+		getTeam();
+	}, []);
+
+	const [faq, setFaq] = useState<
+		Array<{
+			id: number;
+			question_RU: string;
+			question_EN: string;
+			answer_RU: string;
+			answer_EN: string;
+		}>
+	>([]);
+
+	useEffect(() => {
+		const getFaq = async () => {
+			const response = await fetch('https://api.mainxbit.com/get_faq');
+			const parsed = await response.json();
+
+			setFaq(parsed.result);
+		};
+		getFaq();
+	}, []);
+
+	const [sliderText, setSliderText] = useState([]);
+
+	useEffect(() => {
+		const getSliderText = async () => {
+			const response = await fetch('https://api.mainxbit.com/get_carousel');
+			const parsed = await response.json();
+
+			setSliderText(parsed.result);
+		};
+		getSliderText();
+	}, []);
+
+	const [texts, setTexts] = useState({
+		text1_RU: '',
+		text1_EN: '',
+		text2_RU: '',
+		text2_EN: '',
+		text3_RU: '',
+		text3_EN: '',
+		text4_RU: '',
+		text4_EN: '',
+		text5_RU: '',
+		text5_EN: '',
+		ref_text1_RU: '',
+		ref_text1_EN: '',
+		ref_text2_RU: '',
+		ref_text2_EN: '',
+		ref_text3_RU: '',
+		ref_text3_EN: '',
+	});
+
+	useEffect(() => {
+		const getTexts = async () => {
+			const response = await fetch('https://api.mainxbit.com/get_text');
+			const parsed = await response.json();
+
+			setTexts(parsed.result);
+		};
+		getTexts();
 	}, []);
 
 	const store = {
@@ -213,6 +310,11 @@ export const ContextProvider = ({
 		},
 		links: siteInfo,
 		stat,
+		team,
+		faq,
+		sliderText,
+		texts,
+		ethereum,
 	};
 
 	return (

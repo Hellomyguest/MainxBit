@@ -6,10 +6,12 @@ import styles from './AboutBlock.module.css';
 import { Col, Row } from 'antd';
 import clsx from 'clsx';
 import { useResize } from '../../../../shared/utils/useResize';
+import { useStore } from '../../../../shared/store/ContextProvider';
 
 export const AboutBlock = () => {
 	const { isScreenMd, isScreenSm } = useResize();
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
+	const context = useStore();
 	return (
 		<div className={styles._}>
 			<div className={styles.container}>
@@ -28,7 +30,7 @@ export const AboutBlock = () => {
 							)}
 						</InView>
 						<span className={styles.text}>
-							{t('about.text')}
+							{i18n.language === 'en' ? context?.texts?.text4_EN: context?.texts?.text4_RU}
 							<br />
 							<br /> {t('about.text1')}
 						</span>
@@ -61,14 +63,18 @@ export const AboutBlock = () => {
 								MainX Bit
 							</h2>
 
-							<span className={styles.stat}>0.25 USD</span>
+							<span
+								className={styles.stat}
+							>{`${context?.stat?.price} USD`}</span>
 						</div>
 						<Row gutter={[8, isScreenSm ? 34 : 18]} className={styles.grid}>
 							<Col span={12}>
 								<span className={styles.param}>{t('about.released')}</span>
 							</Col>
 							<Col span={12}>
-								<span className={styles.stat}>25,000,000 AMB</span>
+								<span
+									className={styles.stat}
+								>{`${context?.stat?.totalToken} AMB`}</span>
 							</Col>
 
 							<Col span={12}>

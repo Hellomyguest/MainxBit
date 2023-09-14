@@ -25,6 +25,7 @@ export const Account = () => {
 	const [modal, contextHolder] = Modal.useModal();
 	const [inputValue, setInputValue] = useState<string>('');
 	const [price, setPrice] = useState<number>();
+	const [balance, setBalance] = useState(0);
 	const [isApproved, setApproved] = useState(false);
 	const isLogedIn = !!context?.MetaMask?.wallet.accounts.length;
 
@@ -32,17 +33,20 @@ export const Account = () => {
 		if (inputValue && +inputValue > 0) {
 			try {
 				const ref = Cookies.get('ref');
-				const provider = new ethers.BrowserProvider(window.ethereum);
-				const signer = window.ethereum && (await provider.getSigner());
+				const provider = new ethers.BrowserProvider(
+					context?.ethereum ? context?.ethereum : window.ethereum
+				);
+				const signer =
+					window.ethereum ||
+					(context?.ethereum && (await provider.getSigner()));
 				const contract = new ethers.Contract(
 					CONTRACT_ADDRESS,
 					CONTRACT_ABI,
 					signer
 				);
-				const response = ref
+				ref
 					? await contract?.buyToken(ethers.toBigInt(+inputValue), ref)
 					: await contract?.buyToken(ethers.toBigInt(+inputValue));
-				console.log(response);
 				setApproved(false);
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			} catch (error: any) {
@@ -57,8 +61,11 @@ export const Account = () => {
 
 	const approve = async () => {
 		try {
-			const provider = new ethers.BrowserProvider(window.ethereum);
-			const signer = window.ethereum && (await provider.getSigner());
+			const provider = new ethers.BrowserProvider(
+				context?.ethereum ? context?.ethereum : window.ethereum
+			);
+			const signer =
+				window.ethereum || (context?.ethereum && (await provider.getSigner()));
 			const approveContract = new ethers.Contract(
 				CONTRACT_APPROVE_ADDRESS,
 				CONTRACT_APPROVE_ABI,
@@ -84,8 +91,12 @@ export const Account = () => {
 	useEffect(() => {
 		try {
 			const getPrice = async () => {
-				const provider = new ethers.BrowserProvider(window.ethereum);
-				const signer = window.ethereum && (await provider.getSigner());
+				const provider = new ethers.BrowserProvider(
+					context?.ethereum ? context?.ethereum : window.ethereum
+				);
+				const signer =
+					(window.ethereum || context?.ethereum) &&
+					(await provider.getSigner());
 				const contract = new ethers.Contract(
 					CONTRACT_ADDRESS,
 					CONTRACT_ABI,
@@ -97,6 +108,38 @@ export const Account = () => {
 				}
 			};
 			getPrice();
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		} catch (error: any) {
+			modal.error({
+				title: error.reason,
+				icon: <CloseCircleOutlined />,
+				okText: 'Вернуться',
+			});
+		}
+	}, []);
+
+	useEffect(() => {
+		try {
+			const getBalance = async () => {
+				const provider = new ethers.BrowserProvider(
+					context?.ethereum ? context?.ethereum : window.ethereum
+				);
+				const signer =
+					window.ethereum ||
+					(context?.ethereum && (await provider.getSigner()));
+				const contract = new ethers.Contract(
+					CONTRACT_APPROVE_ADDRESS,
+					CONTRACT_APPROVE_ABI,
+					signer
+				);
+				const response = await contract?.balanceOf(
+					context?.MetaMask?.wallet?.accounts?.[0]
+				);
+				if (response) {
+					setBalance(+response.toString(10) / 1e18);
+				}
+			};
+			getBalance();
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} catch (error: any) {
 			modal.error({
@@ -121,7 +164,7 @@ export const Account = () => {
 				<span className={styles.wallet__balance}>{t('account.balance')}</span>
 				<span
 					className={styles.wallet__balance_amount}
-				>{`${context?.MetaMask?.wallet.balance} AMB`}</span>
+				>{`${balance} AMB`}</span>
 				<div className={styles.wallet__buy}>
 					<div className={styles.buy__title}>
 						<span className={styles.wallet__balance}>{t('account.buy')}</span>

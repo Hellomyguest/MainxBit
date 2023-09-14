@@ -1,7 +1,7 @@
 import styles from './ProgressBar.module.css';
 
 export const ProgressBar = ({ bought, total }: { bought: number, total: number }) => {
-	const progress = total / (bought || 1)
+	const progress = bought / total;
 	return (
 		<div className={styles._}>
 			<div

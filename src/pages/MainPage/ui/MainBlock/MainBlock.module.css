@@ -183,14 +183,13 @@
 	.content {
 		width: 100%;
 		margin: 0;
-		padding-top: 1.5625rem;
 		justify-content: flex-start;
-		padding: 1.5625rem 0 0;
+		padding: 1rem 0 0;
 	}
 
 	.content__leftSide {
 		align-items: center;
-		gap: 0.625rem;
+		gap: 0.5rem;
 	}
 
 	.textWrap {

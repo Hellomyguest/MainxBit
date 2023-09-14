@@ -22,9 +22,9 @@ const { Content, Footer } = Layout;
 
 export const PageLayout = ({ children }: { children: React.ReactNode }) => {
 	const { isScreenSm, isScreenLg } = useResize();
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 	const context = useStore();
-	console.log(context);
+
 	return (
 		<Layout className={styles._}>
 			<Content>{children}</Content>
@@ -129,14 +129,22 @@ export const PageLayout = ({ children }: { children: React.ReactNode }) => {
 						)}
 						<div className={styles.documents__links}>
 							<a
-								href={context?.links?.contract_offer || '#'}
+								href={
+									i18n.language === 'en'
+										? context?.links?.contract_offer_EN
+										: context?.links?.contract_offer_RU || '#'
+								}
 								target="_blank"
 								className={styles.link}
 							>
 								{t('footer.contract')}
 							</a>
 							<a
-								href={context?.links?.privacy_policy || '#'}
+								href={
+									i18n.language === 'en'
+										? context?.links?.privacy_policy_EN
+										: context?.links?.privacy_policy_RU || '#'
+								}
 								target="_blank"
 								className={styles.link}
 							>

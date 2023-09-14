@@ -30,10 +30,13 @@ const ExampleCard = ({
 
 export const ReferralMessage = ({ refText }: { refText: string }) => {
 	const context = useContext(Context);
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 	const [activeMessage, setActiveMessage] = useState({
 		title: t('refMessage.1.title'),
-		text: t('refMessage.1.text'),
+		text:
+			i18n.language === 'en'
+				? context?.texts?.ref_text1_EN
+				: context?.texts?.ref_text1_RU,
 	});
 	const [textAreaValue, setTextAreaValue] = useState(activeMessage.text);
 
@@ -43,15 +46,24 @@ export const ReferralMessage = ({ refText }: { refText: string }) => {
 	const examples = [
 		{
 			title: t('refMessage.1.title'),
-			text: t('refMessage.1.text'),
+			text:
+				i18n.language === 'en'
+					? context?.texts?.ref_text1_EN
+					: context?.texts?.ref_text1_RU,
 		},
 		{
 			title: t('refMessage.2.title'),
-			text: t('refMessage.2.text'),
+			text:
+				i18n.language === 'en'
+					? context?.texts?.ref_text2_EN
+					: context?.texts?.ref_text3_RU,
 		},
 		{
 			title: t('refMessage.3.title'),
-			text: t('refMessage.3.text'),
+			text:
+				i18n.language === 'en'
+					? context?.texts?.ref_text3_EN
+					: context?.texts?.ref_text3_RU,
 		},
 	];
 
@@ -62,7 +74,7 @@ export const ReferralMessage = ({ refText }: { refText: string }) => {
 				{examples.map((example) => (
 					<ExampleCard
 						title={example.title}
-						text={example.text}
+						text={example.text || ''}
 						key={example.title}
 						active={activeMessage.title === example.title}
 						onClick={() => {

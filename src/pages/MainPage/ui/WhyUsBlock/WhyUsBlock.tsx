@@ -62,7 +62,7 @@ const ArrowRightComponent = ({
 
 export const WhyUsBlock = () => {
 	const { isScreenMd } = useResize();
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 	const context = useStore();
 
 	const reasons = [
@@ -71,20 +71,6 @@ export const WhyUsBlock = () => {
 		t('whyUs.reasons.3'),
 		t('whyUs.reasons.4'),
 		t('whyUs.reasons.5'),
-	];
-	
-	const benefits = [
-		t('whyUs.benefits.1'),
-		t('whyUs.benefits.2'),
-		t('whyUs.benefits.3'),
-		t('whyUs.benefits.4'),
-		t('whyUs.benefits.5'),
-		t('whyUs.benefits.6'),
-		t('whyUs.benefits.7'),
-		t('whyUs.benefits.8'),
-		t('whyUs.benefits.9'),
-		t('whyUs.benefits.10'),
-		t('whyUs.benefits.11'),
 	];
 
 	return (
@@ -118,9 +104,9 @@ export const WhyUsBlock = () => {
 						nextArrow={<ArrowRightComponent />}
 						/* autoplay */
 					>
-						{benefits.map((item) => (
-							<Benefit key={item} isDark={!context?.theme?.value}>
-								{item}
+						{context?.sliderText?.map((item) => (
+							<Benefit key={item.id} isDark={!context?.theme?.value}>
+								{i18n.language === 'en' ? item.text_EN : item.text_RU}
 							</Benefit>
 						))}
 					</Carousel>

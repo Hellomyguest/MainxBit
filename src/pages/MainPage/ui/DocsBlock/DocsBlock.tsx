@@ -11,37 +11,52 @@ import { useCallback } from 'react';
 
 export const DocsBlock = () => {
 	const { isScreenMd, isScreenLg } = useResize();
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 	const context = useStore();
 
 	const downloadWP = useCallback(() => {
-		const link = document.createElement('a')
-	
-		link.href = `https://api.mainxbit.com/${context?.links?.white_paper}`
-		link.download = 'WhitePaper.conf'
-		link.style.display = 'none'
-	
-		document.body.appendChild(link)
-	
-		link.click()
-	
-		document.body.removeChild(link)
-	}, [context?.links?.white_paper])
+		const link = document.createElement('a');
+
+		link.href = `https://api.mainxbit.com/${
+			i18n.language === 'en'
+				? context?.links?.white_paper_EN
+				: context?.links?.white_paper_RU
+		}`;
+		link.download = 'WhitePaper.conf';
+		link.style.display = 'none';
+
+		document.body.appendChild(link);
+
+		link.click();
+
+		document.body.removeChild(link);
+	}, [
+		context?.links?.white_paper_EN,
+		context?.links?.white_paper_RU,
+		i18n.language,
+	]);
 
 	const downloadOP = useCallback(() => {
-		const link = document.createElement('a')
-	
-		link.href = `https://api.mainxbit.com/${context?.links?.one_pager}`
-		link.download = 'OnePager.pdf'
-		link.style.display = 'none'
-	
-		document.body.appendChild(link)
-	
-		link.click()
-	
-		document.body.removeChild(link)
-	}, [context?.links?.one_pager])
+		const link = document.createElement('a');
 
+		link.href = `https://api.mainxbit.com/${
+			i18n.language === 'en'
+				? context?.links?.one_pager_EN
+				: context?.links?.one_pager_RU
+		}`;
+		link.download = 'OnePager.pdf';
+		link.style.display = 'none';
+
+		document.body.appendChild(link);
+
+		link.click();
+
+		document.body.removeChild(link);
+	}, [
+		context?.links?.one_pager_EN,
+		context?.links?.one_pager_RU,
+		i18n.language,
+	]);
 
 	return (
 		<div className={styles._}>
@@ -62,7 +77,9 @@ export const DocsBlock = () => {
 					</InView>
 					{!isScreenMd && <Document className={styles.document} />}
 					<span className={styles.text}>
-						{t('docs.text')}
+						{i18n.language === 'en'
+							? context?.texts?.text5_EN
+							: context?.texts?.text5_RU}
 					</span>
 					<div className={styles.buttonWrapper}>
 						<Button className={styles.button} onClick={downloadWP}>

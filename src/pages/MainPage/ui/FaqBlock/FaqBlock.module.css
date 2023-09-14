@@ -1,0 +1,145 @@
+._ {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 6.5rem;
+}
+
+.wrapper {
+	width: 77.5rem;
+}
+
+.title {
+	margin: 0 0 2rem;
+	transform: translateX(-100%);
+	transition: all 1s;
+}
+
+.title_visible {
+	transform: translateX(0);
+}
+
+.cardsWrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2rem;
+}
+
+.faqCard {
+	max-height: 7rem;
+	transition: max-height 0.5s ease-out;
+	overflow: hidden;
+	border-top: 1px solid #dcdcdc;
+}
+
+.faqCard:first-child {
+	border: none;
+}
+
+.faqCard_open {
+	max-height: 200rem;
+	transition: max-height 0.5s ease-in;
+}
+
+.faqCard__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 3rem 0 0;
+}
+
+.faqCard__title {
+	font-family: MontserratSemiBold;
+	font-size: 2.5rem;
+	font-weight: 500;
+	line-height: 120%;
+	letter-spacing: 0em;
+	text-align: left;
+}
+
+.faqCard__button {
+	width: auto !important;
+	height: fit-content;
+	padding: 0;
+}
+
+.faqCard__plus {
+	width: 3rem;
+	height: 3rem;
+	position: relative;
+}
+
+.faqCard__vertical {
+	height: 100%;
+	position: absolute;
+	border: 2px solid #f5bd00;
+	left: 50%;
+	transform: translateX(-50%);
+	border-radius: 2px;
+}
+
+.faqCard__horizontal {
+	width: 100%;
+	position: absolute;
+	border: 2px solid #f5bd00;
+	top: 50%;
+	transform: translateY(-50%);
+	border-radius: 2px;
+}
+
+.faqCard__text {
+	padding-top: 1rem;
+	padding-right: 3rem;
+	word-break: break-word;
+	font-family: MontserratRegular;
+	font-size: 1.25rem;
+	font-weight: 400;
+	line-height: 130%;
+	letter-spacing: 0em;
+	text-align: left;
+}
+
+@media (max-width: 1250px) {
+	._ {
+		padding-inline: 1.5625rem;
+	}
+	.wrapper {
+		width: 100%;
+	}
+	.faqCard__title {
+		font-size: 2rem;
+	}
+}
+
+@media (max-width: 800px) {
+	.title {
+		margin-bottom: 30px;
+	}
+	.faqCard__title {
+		font-size: 1.5rem;
+	}
+	.faqCard__text {
+		font-size: 1.2rem;
+	}
+	.faqCard__plus {
+		width: 2rem;
+		height: 2rem;
+	}
+}
+
+@media (max-width: 576px) {
+	.title {
+		margin-bottom: 21px;
+	}
+	.faqCard__title {
+		font-size: 1.2rem;
+	}
+	.faqCard__text {
+		font-size: 1rem;
+	}
+	.faqCard__text {
+		padding-right: 0;
+	}
+}

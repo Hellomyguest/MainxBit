@@ -7,6 +7,7 @@ import { TeamBlock } from './ui/TeamBlock/TeamBlock';
 import { MapBlock } from './ui/MapBlock/MapBlock';
 import { DocsBlock } from './ui/DocsBlock/DocsBlock';
 import { useSearchParams } from 'react-router-dom';
+import { FaqBlock } from './ui/FaqBlock/FaqBlock';
 
 export const MainPage = () => {
 	const [searchParams] = useSearchParams();
@@ -31,6 +32,7 @@ export const MainPage = () => {
 				<TeamBlock />
 				<MapBlock />
 				<DocsBlock />
+				<FaqBlock/>
 			</div>
 		</div>
 	);

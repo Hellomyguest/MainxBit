@@ -29,16 +29,55 @@
 	transition: height 0.3s;
 }
 
-.gallery_open {
-	height: 603px;
-}
-
 .card {
 	width: 293px;
 	height: 292px;
 	border-radius: 30px;
 	border: 4px solid #f5bd00;
 	background-color: #d9d9d9;
+	background-size: contain;
+}
+
+.card__mask {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	border-radius: 30px;
+	opacity: 0;
+	background-color: #00000080;
+	transition: all 0.5s;
+	padding-bottom: 1rem;
+}
+
+:hover {
+	opacity: 1;
+}
+
+.card__text {
+	font-family: MontserratSemiBold;
+	font-size: 1.25rem;
+	font-weight: 600;
+	line-height: 130%;
+	letter-spacing: 0em;
+	text-align: center;
+	color: var(--primary-button-color);
+}
+
+.card__iconWrapper {
+	margin-top: 1.5rem;
+	display: flex;
+	justify-content: space-evenly;
+	width: 60%;
+}
+
+.card__button {
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .button {
@@ -62,17 +101,11 @@
 	.gallery {
 		width: 917px;
 	}
-	.gallery_open {
-		height: 914px;
-	}
 }
 
 @media (max-width: 968px) {
 	.gallery {
 		width: 605px;
-	}
-	.gallery_open {
-		height: 1225px;
 	}
 }
 
@@ -84,14 +117,31 @@
 		height: 10rem;
 		width: 518px;
 	}
-	.gallery_open {
-		height: 518px;
-	}
 	.card {
 		width: 10rem;
 		height: 10rem;
 		border-radius: 25px;
 		border-width: 2px;
+	}
+	.card__mask {
+		border-radius: 25px;
+		padding-bottom: 0.8rem;
+	}
+	.card__iconWrapper {
+		margin-top: 0.8rem;
+	}
+	.card__text {
+		font-family: MontserratRegular;
+		font-weight: 400;
+		font-size: 0.7rem;
+	}
+	.card__button {
+		width: 20px;
+		height: 20px;
+	}
+	.card__icon {
+		width: 20px;
+		height: 20px;
 	}
 	.button {
 		font-size: 0.875rem;
@@ -107,16 +157,38 @@
 		height: 6.125rem;
 		gap: 6px;
 	}
-	.gallery_open {
-		height: 306px;
-	}
 	.card {
 		width: 6.125rem;
 		height: 6.125rem;
 		border-radius: 20px;
 		border-width: 1px;
 	}
+	.card__mask {
+		border-radius: 20px;
+		padding-bottom: 0.3rem;
+	}
+	.card__iconWrapper {
+		margin-top: 0.3rem;
+	}
+	.card__text {
+		font-family: MontserratRegular;
+		font-weight: 400;
+		font-size: 0.4rem;
+		color: #ffffff;
+	}
+	.card__button {
+		width: 0.8rem;
+		height: 0.8rem;
+	}
+	.card__icon {
+		width: 0.8rem;
+		height: 0.8rem;
+	}
 	.button {
 		margin-top: 0;
 	}
+}
+
+.gallery_open {
+	height: fit-content;
 }

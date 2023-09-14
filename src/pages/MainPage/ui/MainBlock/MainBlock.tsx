@@ -46,7 +46,7 @@ export const MainBlock = ({
 	setGoingDown: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
 	const [modal, contextHolder] = Modal.useModal();
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 	const { isScreenSm, isScreenMd, isScreenLg } = useResize();
 	const context = useStore();
 	const navigate = useNavigate();
@@ -142,9 +142,11 @@ export const MainBlock = ({
 						<div style={{ display: 'flex' }}>
 							<div className={styles.textWrap}>
 								<h1 className={styles.content__title}>MainX Bit</h1>
-								<span className={styles.content__text}>{`${t(
-									'main.text'
-								)}${context?.stat?.price}${t('main.text2')}`}</span>
+								<span className={styles.content__text}>
+									{i18n.language === 'en'
+										? context?.texts?.text1_EN
+										: context?.texts?.text1_RU}
+								</span>
 								<Button
 									onClick={() => {
 										context?.MetaMask.wallet?.accounts.length
